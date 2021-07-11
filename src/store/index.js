@@ -1,14 +1,18 @@
 import { applyMiddleware, combineReducers, createStore } from 'redux';
 import thunkMiddleware from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension';
-import userReducer from './user/reducer';
+import budgetReducer from './budget/reducer';
+import mortgageReducer from './mortgage/reducer';
+import retirementReducer from './retirement/reducer';
 import loadingReducer from './loading/reducer';
 import storage from 'redux-persist/lib/storage';
 import persistReducer from 'redux-persist/es/persistReducer';
 import persistStore from 'redux-persist/es/persistStore';
 
 const rootReducer = combineReducers({
-  user: userReducer,
+  budgetReducer: budgetReducer,
+  mortgage: mortgageReducer,
+  retirement: retirementReducer,
   loading: loadingReducer,
 });
 
