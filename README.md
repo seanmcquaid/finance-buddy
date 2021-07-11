@@ -14,11 +14,8 @@ Calculate totals for each category then see how much is left over
 ## Mortgage
 
 Input interest rate
+Select mortgage length - 30 vs 15
 Calculate rough monthly payment
-
-### 30 year
-
-### 15 year
 
 ## Retirement
 
@@ -29,3 +26,7 @@ Input pre-tax monthly amount saved
 Input after-tax monthly amount saved
 Input employer match
 Calculate rough net worth
+
+## Additional Arch
+
+Formik + Yup for the inputs?
