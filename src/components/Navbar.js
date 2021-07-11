@@ -6,6 +6,9 @@ const Navbar = () => (
     <NavLinks>
       <NavLinkListItem>
         <NavLink to="/">Home</NavLink>
+        <NavLink to="/budget">Budget</NavLink>
+        <NavLink to="/mortgage">Mortgage</NavLink>
+        <NavLink to="/retirement">Retirement</NavLink>
       </NavLinkListItem>
     </NavLinks>
   </StyledNav>
