@@ -4,7 +4,6 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import budgetReducer from './budget/reducer';
 import mortgageReducer from './mortgage/reducer';
 import retirementReducer from './retirement/reducer';
-import loadingReducer from './loading/reducer';
 import storage from 'redux-persist/lib/storage';
 import persistReducer from 'redux-persist/es/persistReducer';
 import persistStore from 'redux-persist/es/persistStore';
@@ -13,7 +12,6 @@ const rootReducer = combineReducers({
   budgetReducer: budgetReducer,
   mortgage: mortgageReducer,
   retirement: retirementReducer,
-  loading: loadingReducer,
 });
 
 const persistConfig = {
