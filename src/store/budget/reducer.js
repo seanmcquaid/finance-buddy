@@ -100,17 +100,18 @@ const reducer = (state = initialState, action) => {
         state.flexibleSpending,
         state.savings,
       );
-      const updatedRemainingAmountAfterUpdatingFixedCostEntry =
-        calculateRemainingAmount(
-          state.totalBudget,
-          updatedSpendingAfterUpdatingFixedCostEntry,
-        );
       return {
         ...state,
         fixedCosts: {
           ...updatedFixedCostsAfterUpdatingEntry,
         },
-        remainingAmount: updatedRemainingAmountAfterUpdatingFixedCostEntry,
+        fixedCostsPercentage: calculateCategoryPercentageOfBudget(
+          updatedSpendingAfterUpdatingFixedCostEntry,
+          state.totalBudget,
+        ),
+        fixedCostsTotal: calculateTotalForCategory(
+          updatedFixedCostsAfterUpdatingEntry,
+        ),
       };
     case REMOVE_FIXED_COST_ENTRY:
       const updatedFixedCostsAfterRemovingEntry = { ...state.fixedCosts };
@@ -121,17 +122,18 @@ const reducer = (state = initialState, action) => {
         state.flexibleSpending,
         state.savings,
       );
-      const updatedRemainingAmountAfterRemovingFixedCostEntry =
-        calculateRemainingAmount(
-          state.totalBudget,
-          updatedSpendingAfterRemovingFixedCostEntry,
-        );
       return {
         ...state,
         fixedCosts: {
           ...updatedFixedCostsAfterRemovingEntry,
         },
-        remainingAmount: updatedRemainingAmountAfterRemovingFixedCostEntry,
+        fixedCostsPercentage: calculateCategoryPercentageOfBudget(
+          updatedSpendingAfterRemovingFixedCostEntry,
+          state.totalBudget,
+        ),
+        fixedCostsTotal: calculateTotalForCategory(
+          updatedFixedCostsAfterRemovingEntry,
+        ),
       };
     case ADD_FLEXIBLE_SPENDING_ENTRY:
       return {
