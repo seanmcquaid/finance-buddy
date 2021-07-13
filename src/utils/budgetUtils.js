@@ -12,3 +12,9 @@ export const calculateTotal = (fixed, flexible, savings) =>
 
 export const calculateRemainingAmount = (totalBudget, totalSpending) =>
   totalBudget - totalSpending;
+
+export const calculateTotalPercentage = (
+  fixedPercentage,
+  flexiblePercentage,
+  savingsPercentage,
+) => (fixedPercentage + flexiblePercentage + savingsPercentage) * 100;

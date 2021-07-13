@@ -27,8 +27,8 @@ const initialState = {
   savings: {},
   savingsTotal: 0,
   totalBudget: 0,
-  totalPercentage: 100,
   remainingAmount: 0,
+  totalPercentage: 100,
 };
 
 const reducer = (state = initialState, action) => {
