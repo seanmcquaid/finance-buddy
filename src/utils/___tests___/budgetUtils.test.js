@@ -3,6 +3,7 @@ import {
   calculateCategoryPercentageOfBudget,
   calculateTotal,
   calculateRemainingAmount,
+  calculateTotalPercentage,
 } from '../budgetUtils';
 
 describe('budgetUtils', () => {
@@ -22,5 +23,9 @@ describe('budgetUtils', () => {
 
   it('calculateRemainingAmount', () => {
     expect(calculateRemainingAmount(2000, 1500)).toEqual(500);
+  });
+
+  it('calculateTotalPercentage', () => {
+    expect(calculateTotalPercentage(0.1, 0.2, 0.7)).toEqual(100);
   });
 });
