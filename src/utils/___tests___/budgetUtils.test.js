@@ -2,7 +2,7 @@ import {
   calculateTotalForCategory,
   calculateCategoryPercentageOfBudget,
   calculateTotal,
-  calculateAmountLeft,
+  calculateRemainingAmount,
 } from '../budgetUtils';
 
 describe('budgetUtils', () => {
@@ -20,7 +20,7 @@ describe('budgetUtils', () => {
     expect(calculateTotal(1000, 300, 200)).toEqual(1500);
   });
 
-  it('calculateAmountLeft', () => {
-    expect(calculateAmountLeft(2000, 1500)).toEqual(500);
+  it('calculateRemainingAmount', () => {
+    expect(calculateRemainingAmount(2000, 1500)).toEqual(500);
   });
 });

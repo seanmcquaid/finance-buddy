@@ -1,5 +1,9 @@
 /* eslint-disable no-case-declarations */
 import {
+  calculateRemainingAmount,
+  calculateTotal,
+} from '../../utils/budgetUtils';
+import {
   ADD_FIXED_COST_ENTRY,
   ADD_FLEXIBLE_SPENDING_ENTRY,
   ADD_SAVINGS_ENTRY,
@@ -35,27 +39,69 @@ const reducer = (state = initialState, action) => {
         total: action.payload.total,
       };
     case ADD_FIXED_COST_ENTRY:
+      const updatedFixedCostsAfterAddingEntry = {
+        ...state.fixedCosts,
+        [action.payload.name]: 0,
+      };
+      const updatedSpendingAfterAddedFixedCostEntry = calculateTotal(
+        updatedFixedCostsAfterAddingEntry,
+        state.flexibleSpending,
+        state.savings,
+      );
+      const updatedRemainingAmountAfterAddedFixedCostEntry =
+        calculateRemainingAmount(
+          state.totalBudget,
+          updatedSpendingAfterAddedFixedCostEntry,
+        );
       return {
         ...state,
         fixedCosts: {
-          ...state.fixedCosts,
-          [action.payload.name]: 0,
+          ...updatedFixedCostsAfterAddingEntry,
         },
+        remainingAmount: updatedRemainingAmountAfterAddedFixedCostEntry,
       };
     case UPDATE_FIXED_COST_ENTRY:
+      const updatedFixedCostsAfterUpdatingEntry = {
+        ...state.fixedCosts,
+        [action.payload.name]: action.payload.amount,
+      };
+      const updatedSpendingAfterUpdatingFixedCostEntry = calculateTotal(
+        updatedFixedCostsAfterUpdatingEntry,
+        state.flexibleSpending,
+        state.savings,
+      );
+      const updatedRemainingAmountAfterUpdatingFixedCostEntry =
+        calculateRemainingAmount(
+          state.totalBudget,
+          updatedSpendingAfterUpdatingFixedCostEntry,
+        );
       return {
         ...state,
         fixedCosts: {
-          ...state.fixedCosts,
-          [action.payload.name]: action.payload.amount,
+          ...updatedFixedCostsAfterUpdatingEntry,
         },
+        remainingAmount: updatedRemainingAmountAfterUpdatingFixedCostEntry,
       };
     case REMOVE_FIXED_COST_ENTRY:
-      const fixedCosts = { ...state.fixedCosts };
-      delete fixedCosts[action.payload.name];
+      const updatedFixedCostsAfterRemovingEntry = { ...state.fixedCosts };
+      delete updatedFixedCostsAfterRemovingEntry[action.payload.name];
+
+      const updatedSpendingAfterRemovingFixedCostEntry = calculateTotal(
+        updatedFixedCostsAfterRemovingEntry,
+        state.flexibleSpending,
+        state.savings,
+      );
+      const updatedRemainingAmountAfterRemovingFixedCostEntry =
+        calculateRemainingAmount(
+          state.totalBudget,
+          updatedSpendingAfterRemovingFixedCostEntry,
+        );
       return {
         ...state,
-        fixedCosts,
+        fixedCosts: {
+          ...updatedFixedCostsAfterRemovingEntry,
+        },
+        remainingAmount: updatedRemainingAmountAfterRemovingFixedCostEntry,
       };
     case ADD_FLEXIBLE_SPENDING_ENTRY:
       return {

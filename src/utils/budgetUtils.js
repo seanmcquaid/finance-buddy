@@ -10,5 +10,5 @@ export const calculateTotalForCategory = (categoryEntries = {}) =>
 export const calculateTotal = (fixed, flexible, savings) =>
   fixed + flexible + savings;
 
-export const calculateAmountLeft = (totalBudget, totalSpending) =>
+export const calculateRemainingAmount = (totalBudget, totalSpending) =>
   totalBudget - totalSpending;
