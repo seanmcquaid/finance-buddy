@@ -1,12 +1,17 @@
 /* eslint-disable no-case-declarations */
 import {
+  calculateCategoryPercentageOfBudget,
   calculateRemainingAmount,
   calculateTotal,
+  calculateTotalForCategory,
+  calculateTotalPercentage,
 } from '../../utils/budgetUtils';
 import {
   ADD_FIXED_COST_ENTRY,
   ADD_FLEXIBLE_SPENDING_ENTRY,
   ADD_SAVINGS_ENTRY,
+  CALCULATE_REMAINING_AMOUNT,
+  CALCULATE_TOTAL_PERCENTAGE,
   REMOVE_FIXED_COST_ENTRY,
   REMOVE_FLEXIBLE_SPENDING_ENTRY,
   REMOVE_SAVINGS_ENTRY,
@@ -17,13 +22,13 @@ import {
 } from './actionTypes';
 
 const initialState = {
-  fixedCostsPercentage: 0.5,
+  fixedCostsPercentage: 0,
   fixedCosts: {},
   fixedCostsTotal: 0,
-  flexibleSpendingPercentage: 0.3,
+  flexibleSpendingPercentage: 0,
   flexibleSpending: {},
   flexibleSpendingTotal: 0,
-  savingsPercentage: 0.2,
+  savingsPercentage: 0,
   savings: {},
   savingsTotal: 0,
   totalBudget: 0,
@@ -38,6 +43,30 @@ const reducer = (state = initialState, action) => {
         ...state,
         total: action.payload.total,
       };
+    case CALCULATE_TOTAL_PERCENTAGE:
+      const totalPercentage = calculateTotalPercentage(
+        state.fixedCostsPercentage,
+        state.flexibleSpendingPercentage,
+        state.savingsPercentage,
+      );
+      return {
+        ...state,
+        totalPercentage,
+      };
+    case CALCULATE_REMAINING_AMOUNT:
+      const total = calculateTotal(
+        state.fixedCosts,
+        state.flexibleSpending,
+        state.savings,
+      );
+      const remainingAmount = calculateRemainingAmount(
+        state.totalBudget,
+        total,
+      );
+      return {
+        ...state,
+        remainingAmount,
+      };
     case ADD_FIXED_COST_ENTRY:
       const updatedFixedCostsAfterAddingEntry = {
         ...state.fixedCosts,
@@ -48,17 +77,18 @@ const reducer = (state = initialState, action) => {
         state.flexibleSpending,
         state.savings,
       );
-      const updatedRemainingAmountAfterAddedFixedCostEntry =
-        calculateRemainingAmount(
-          state.totalBudget,
-          updatedSpendingAfterAddedFixedCostEntry,
-        );
       return {
         ...state,
         fixedCosts: {
           ...updatedFixedCostsAfterAddingEntry,
         },
-        remainingAmount: updatedRemainingAmountAfterAddedFixedCostEntry,
+        fixedCostsPercentage: calculateCategoryPercentageOfBudget(
+          updatedSpendingAfterAddedFixedCostEntry,
+          state.totalBudget,
+        ),
+        fixedCostsTotal: calculateTotalForCategory(
+          updatedFixedCostsAfterAddingEntry,
+        ),
       };
     case UPDATE_FIXED_COST_ENTRY:
       const updatedFixedCostsAfterUpdatingEntry = {
