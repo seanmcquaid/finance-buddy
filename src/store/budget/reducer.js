@@ -41,7 +41,7 @@ const reducer = (state = initialState, action) => {
     case SET_TOTAL_BUDGET:
       return {
         ...state,
-        total: action.payload.total,
+        totalBudget: action.payload.total,
       };
     case CALCULATE_TOTAL_PERCENTAGE:
       const totalPercentage = calculateTotalPercentage(
@@ -55,9 +55,9 @@ const reducer = (state = initialState, action) => {
       };
     case CALCULATE_REMAINING_AMOUNT:
       const total = calculateTotal(
-        state.fixedCosts,
-        state.flexibleSpending,
-        state.savings,
+        calculateTotalForCategory(state.fixedCosts),
+        calculateTotalForCategory(state.flexibleSpending),
+        calculateTotalForCategory(state.savings),
       );
       const remainingAmount = calculateRemainingAmount(
         state.totalBudget,
