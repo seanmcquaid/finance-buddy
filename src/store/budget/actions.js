@@ -5,6 +5,9 @@ import {
   calculateRemainingAmount,
   addFlexibleSpendingEntry,
   addSavingsEntry,
+  updateFixedCostEntry,
+  updateFlexibleSpendingEntry,
+  updateSavingsEntry,
 } from './actionCreators';
 
 export const setTotalBudgetAction = (total) => (dispatch) =>
@@ -24,6 +27,25 @@ export const addFlexibleSpendingEntryAction = (name) => (dispatch) => {
 
 export const addSavingsEntryAction = (name) => (dispatch) => {
   dispatch(addSavingsEntry(name));
+  dispatch(calculateTotalPercentage());
+  dispatch(calculateRemainingAmount());
+};
+
+export const updateFixedCostEntryAction = (name, amount) => (dispatch) => {
+  dispatch(updateFixedCostEntry(name, amount));
+  dispatch(calculateTotalPercentage());
+  dispatch(calculateRemainingAmount());
+};
+
+export const updateFlexibleSpendingEntryAction =
+  (name, amount) => (dispatch) => {
+    dispatch(updateFlexibleSpendingEntry(name, amount));
+    dispatch(calculateTotalPercentage());
+    dispatch(calculateRemainingAmount());
+  };
+
+export const updateSavingsEntryAction = (name, amount) => (dispatch) => {
+  dispatch(updateSavingsEntry(name, amount));
   dispatch(calculateTotalPercentage());
   dispatch(calculateRemainingAmount());
 };
