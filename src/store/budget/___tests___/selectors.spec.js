@@ -6,9 +6,12 @@ import {
   flexibleSpendingPercentageSelector,
   flexibleSpendingSelector,
   flexibleSpendingTotalSelector,
+  remainingAmountSelector,
   savingsPercentageSelector,
   savingsSelector,
   savingsTotalSelector,
+  totalBudgetSelector,
+  totalPercentageSelector,
 } from '../selectors';
 
 describe('budget selectors', () => {
@@ -93,9 +96,15 @@ describe('budget selectors', () => {
     expect(savingsTotalSelector(state)).toEqual(0);
   });
 
-  it('totalBudgetSelector', () => {});
+  it('totalBudgetSelector', () => {
+    expect(totalBudgetSelector(state)).toEqual(0);
+  });
 
-  it('remainingAmountSelector', () => {});
+  it('remainingAmountSelector', () => {
+    expect(remainingAmountSelector(state)).toEqual(0);
+  });
 
-  it('totalPercentageSelector', () => {});
+  it('totalPercentageSelector', () => {
+    expect(totalPercentageSelector(state)).toEqual(100);
+  });
 });
