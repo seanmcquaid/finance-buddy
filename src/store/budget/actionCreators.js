@@ -4,9 +4,9 @@ import {
   ADD_SAVINGS_ENTRY,
   CALCULATE_REMAINING_AMOUNT,
   CALCULATE_TOTAL_PERCENTAGE,
-  REMOVE_FIXED_COST_ENTRY,
-  REMOVE_FLEXIBLE_SPENDING_ENTRY,
-  REMOVE_SAVINGS_ENTRY,
+  DELETE_FIXED_COST_ENTRY,
+  DELETE_FLEXIBLE_SPENDING_ENTRY,
+  DELETE_SAVINGS_ENTRY,
   SET_TOTAL_BUDGET,
   UPDATE_FIXED_COST_ENTRY,
   UPDATE_FLEXIBLE_SPENDING_ENTRY,
@@ -56,17 +56,17 @@ export const updateSavingsEntry = (name, amount) => ({
   payload: { name, amount },
 });
 
-export const removeFixedCostEntry = (name) => ({
-  type: REMOVE_FIXED_COST_ENTRY,
+export const deleteFixedCostEntry = (name) => ({
+  type: DELETE_FIXED_COST_ENTRY,
   payload: { name },
 });
 
-export const removeFlexibleSpendingEntry = (name) => ({
-  type: REMOVE_FLEXIBLE_SPENDING_ENTRY,
+export const deleteFlexibleSpendingEntry = (name) => ({
+  type: DELETE_FLEXIBLE_SPENDING_ENTRY,
   payload: { name },
 });
 
-export const removeSavingsEntry = (name) => ({
-  type: REMOVE_SAVINGS_ENTRY,
+export const deleteSavingsEntry = (name) => ({
+  type: DELETE_SAVINGS_ENTRY,
   payload: { name },
 });

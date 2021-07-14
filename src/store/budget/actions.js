@@ -8,6 +8,9 @@ import {
   updateFixedCostEntry,
   updateFlexibleSpendingEntry,
   updateSavingsEntry,
+  deleteFixedCostEntry,
+  deleteFlexibleSpendingEntry,
+  deleteSavingsEntry,
 } from './actionCreators';
 
 export const setTotalBudgetAction = (total) => (dispatch) =>
@@ -46,6 +49,24 @@ export const updateFlexibleSpendingEntryAction =
 
 export const updateSavingsEntryAction = (name, amount) => (dispatch) => {
   dispatch(updateSavingsEntry(name, amount));
+  dispatch(calculateTotalPercentage());
+  dispatch(calculateRemainingAmount());
+};
+
+export const deleteFixedCostEntryAction = (name) => (dispatch) => {
+  dispatch(deleteFixedCostEntry(name));
+  dispatch(calculateTotalPercentage());
+  dispatch(calculateRemainingAmount());
+};
+
+export const deleteFlexibleSpendingEntryAction = (name) => (dispatch) => {
+  dispatch(deleteFlexibleSpendingEntry(name));
+  dispatch(calculateTotalPercentage());
+  dispatch(calculateRemainingAmount());
+};
+
+export const deleteSavingsEntryAction = (name) => (dispatch) => {
+  dispatch(deleteSavingsEntry(name));
   dispatch(calculateTotalPercentage());
   dispatch(calculateRemainingAmount());
 };
