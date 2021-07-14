@@ -5,7 +5,9 @@ describe('budget selectors', () => {
     const initialState = {
       budget: {
         fixedCostsPercentage: 0,
-        fixedCosts: {},
+        fixedCosts: {
+          rent: 800,
+        },
         fixedCostsTotal: 0,
         flexibleSpendingPercentage: 0,
         flexibleSpending: {},
@@ -18,6 +20,6 @@ describe('budget selectors', () => {
         totalPercentage: 100,
       },
     };
-    expect(fixedCostsSelector({ budget: { fixedCosts: {} } })).toEqual([]);
+    expect(fixedCostsSelector(initialState)).toEqual([{ rent: 800 }]);
   });
 });
