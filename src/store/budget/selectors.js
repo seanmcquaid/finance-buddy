@@ -25,7 +25,10 @@ export const flexibleSpendingPercentageSelector = createSelector(
 
 export const flexibleSpendingSelector = createSelector(
   budgetSelector,
-  (budget) => budget.flexibleSpending,
+  (budget) =>
+    Object.keys(budget.flexibleSpending).map((key) => ({
+      [key]: budget.flexibleSpending[key],
+    })),
 );
 
 export const flexibleSpendingTotalSelector = createSelector(
@@ -38,9 +41,10 @@ export const savingsPercentageSelector = createSelector(
   (budget) => budget.savingsPercentage,
 );
 
-export const savingsSelector = createSelector(
-  budgetSelector,
-  (budget) => budget.savings,
+export const savingsSelector = createSelector(budgetSelector, (budget) =>
+  Object.keys(budget.savings).map((key) => ({
+    [key]: budget.savings[key],
+  })),
 );
 
 export const savingsTotalSelector = createSelector(

@@ -2,6 +2,13 @@ import {
   budgetSelector,
   fixedCostsPercentageSelector,
   fixedCostsSelector,
+  fixedCostsTotalSelector,
+  flexibleSpendingPercentageSelector,
+  flexibleSpendingSelector,
+  flexibleSpendingTotalSelector,
+  savingsPercentageSelector,
+  savingsSelector,
+  savingsTotalSelector,
 } from '../selectors';
 
 describe('budget selectors', () => {
@@ -58,19 +65,33 @@ describe('budget selectors', () => {
     expect(fixedCostsSelector(state)).toEqual([{ rent: 800 }]);
   });
 
-  it('fixedCostsTotalSelector', () => {});
+  it('fixedCostsTotalSelector', () => {
+    expect(fixedCostsTotalSelector(state)).toEqual(0);
+  });
 
-  it('flexibleSpendingPercentageSelector', () => {});
+  it('flexibleSpendingPercentageSelector', () => {
+    expect(flexibleSpendingPercentageSelector(state)).toEqual(0);
+  });
 
-  it('flexibleSpendingSelector', () => {});
+  it('flexibleSpendingSelector', () => {
+    expect(flexibleSpendingSelector(state)).toEqual([{ cards: 200 }]);
+  });
 
-  it('flexibleSpendingTotalSelector', () => {});
+  it('flexibleSpendingTotalSelector', () => {
+    expect(flexibleSpendingTotalSelector(state)).toEqual(0);
+  });
 
-  it('savingsPercentageSelector', () => {});
+  it('savingsPercentageSelector', () => {
+    expect(savingsPercentageSelector(state)).toEqual(0);
+  });
 
-  it('savingsSelector', () => {});
+  it('savingsSelector', () => {
+    expect(savingsSelector(state)).toEqual([{ chase: 2000 }]);
+  });
 
-  it('savingsTotalSelector', () => {});
+  it('savingsTotalSelector', () => {
+    expect(savingsTotalSelector(state)).toEqual(0);
+  });
 
   it('totalBudgetSelector', () => {});
 
