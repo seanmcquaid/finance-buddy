@@ -1,15 +1,16 @@
 import { createSelector } from 'reselect';
 
-export const budgetSelector = createSelector((state) => state.budget);
+export const budgetSelector = (state) => state.budget;
 
 export const fixedCostsPercentageSelector = createSelector(
   budgetSelector,
   (budget) => budget.fixedCostsPercentage,
 );
 
-export const fixedCostsSelector = createSelector(
-  budgetSelector,
-  (budget) => budget.fixedCosts,
+export const fixedCostsSelector = createSelector(budgetSelector, (budget) =>
+  Object.keys(budget.fixedCosts).map((key) => ({
+    [key]: budget.fixedCosts[key],
+  })),
 );
 
 export const fixedCostsTotalSelector = createSelector(
