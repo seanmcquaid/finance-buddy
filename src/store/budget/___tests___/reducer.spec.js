@@ -1,13 +1,16 @@
 import {
   ADD_FIXED_COST_ENTRY,
   ADD_FLEXIBLE_SPENDING_ENTRY,
+  ADD_SAVINGS_ENTRY,
   CALCULATE_REMAINING_AMOUNT,
   CALCULATE_TOTAL_PERCENTAGE,
   DELETE_FIXED_COST_ENTRY,
   DELETE_FLEXIBLE_SPENDING_ENTRY,
+  DELETE_SAVINGS_ENTRY,
   SET_TOTAL_BUDGET,
   UPDATE_FIXED_COST_ENTRY,
   UPDATE_FLEXIBLE_SPENDING_ENTRY,
+  UPDATE_SAVINGS_ENTRY,
 } from '../actionTypes';
 import reducer from '../reducer';
 
@@ -56,8 +59,6 @@ describe('budget reducer', () => {
     });
 
     expect(result.fixedCosts).toEqual({ rent: 1000, insurance: 0 });
-    expect(result.fixedCostsPercentage).toEqual(0.3333333333333333);
-    expect(result.fixedCostsTotal).toEqual(1000);
   });
 
   it('UPDATE_FIXED_COST_ENTRY', () => {
@@ -67,8 +68,6 @@ describe('budget reducer', () => {
     });
 
     expect(result.fixedCosts).toEqual({ rent: 800 });
-    expect(result.fixedCostsPercentage).toEqual(0.26666666666666666);
-    expect(result.fixedCostsTotal).toEqual(800);
   });
 
   it('DELETE_FIXED_COST_ENTRY', () => {
@@ -78,8 +77,6 @@ describe('budget reducer', () => {
     });
 
     expect(result.fixedCosts).toEqual({});
-    expect(result.fixedCostsPercentage).toEqual(0);
-    expect(result.fixedCostsTotal).toEqual(0);
   });
 
   it('ADD_FLEXIBLE_SPENDING_ENTRY', () => {
@@ -89,8 +86,6 @@ describe('budget reducer', () => {
     });
 
     expect(result.flexibleSpending).toEqual({ food: 500, shrimp: 0 });
-    expect(result.flexibleSpendingPercentage).toEqual(0.16666666666666666);
-    expect(result.flexibleSpendingTotal).toEqual(500);
   });
 
   it('UPDATE_FLEXIBLE_SPENDING_ENTRY', () => {
@@ -100,8 +95,6 @@ describe('budget reducer', () => {
     });
 
     expect(result.flexibleSpending).toEqual({ food: 800 });
-    expect(result.flexibleSpendingPercentage).toEqual(0.26666666666666666);
-    expect(result.flexibleSpendingTotal).toEqual(800);
   });
 
   it('DELETE_FLEXIBLE_SPENDING_ENTRY', () => {
@@ -111,13 +104,32 @@ describe('budget reducer', () => {
     });
 
     expect(result.flexibleSpending).toEqual({});
-    expect(result.flexibleSpendingPercentage).toEqual(0);
-    expect(result.flexibleSpendingTotal).toEqual(0);
   });
 
-  it('ADD_SAVINGS_ENTRY', () => {});
+  it('ADD_SAVINGS_ENTRY', () => {
+    const result = reducer(state, {
+      type: ADD_SAVINGS_ENTRY,
+      payload: { name: 'venmo' },
+    });
 
-  it('UPDATE_SAVINGS_ENTRY', () => {});
+    expect(result.savings).toEqual({ chase: 1500, venmo: 0 });
+  });
 
-  it('DELETE_SAVINGS_ENTRY', () => {});
+  it('UPDATE_SAVINGS_ENTRY', () => {
+    const result = reducer(state, {
+      type: UPDATE_SAVINGS_ENTRY,
+      payload: { name: 'chase', amount: 800 },
+    });
+
+    expect(result.savings).toEqual({ chase: 800 });
+  });
+
+  it('DELETE_SAVINGS_ENTRY', () => {
+    const result = reducer(state, {
+      type: DELETE_SAVINGS_ENTRY,
+      payload: { name: 'chase' },
+    });
+
+    expect(result.savings).toEqual({});
+  });
 });
