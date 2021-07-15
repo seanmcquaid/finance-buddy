@@ -2,6 +2,8 @@ import {
   ADD_FIXED_COST_ENTRY,
   ADD_FLEXIBLE_SPENDING_ENTRY,
   ADD_SAVINGS_ENTRY,
+  CALCULATE_CATEGORY_PERCENTAGES,
+  CALCULATE_CATEGORY_TOTALS,
   CALCULATE_REMAINING_AMOUNT,
   CALCULATE_TOTAL_PERCENTAGE,
   DELETE_FIXED_COST_ENTRY,
@@ -34,22 +36,21 @@ describe('budget reducer', () => {
     totalPercentage: 100,
   };
   it('SET_TOTAL_BUDGET', () => {
-    expect(
-      reducer(state, { type: SET_TOTAL_BUDGET, payload: { total: 3000 } })
-        .totalBudget,
-    ).toEqual(3000);
+    const result = reducer(state, {
+      type: SET_TOTAL_BUDGET,
+      payload: { total: 3000 },
+    });
+    expect(result.totalBudget).toEqual(3000);
   });
 
   it('CALCULATE_TOTAL_PERCENTAGE', () => {
-    expect(
-      reducer(state, { type: CALCULATE_TOTAL_PERCENTAGE }).totalPercentage,
-    ).toEqual(100);
+    const result = reducer(state, { type: CALCULATE_TOTAL_PERCENTAGE });
+    expect(result.totalPercentage).toEqual(100);
   });
 
   it('CALCULATE_REMAINING_AMOUNT', () => {
-    expect(
-      reducer(state, { type: CALCULATE_REMAINING_AMOUNT }).remainingAmount,
-    ).toEqual(0);
+    const result = reducer(state, { type: CALCULATE_REMAINING_AMOUNT });
+    expect(result.remainingAmount).toEqual(0);
   });
 
   it('ADD_FIXED_COST_ENTRY', () => {
@@ -131,5 +132,23 @@ describe('budget reducer', () => {
     });
 
     expect(result.savings).toEqual({});
+  });
+
+  it('CALCULATE_CATEGORY_PERCENTAGES', () => {
+    const result = reducer(state, {
+      type: CALCULATE_CATEGORY_PERCENTAGES,
+    });
+    expect(result.fixedCostsPercentage).toEqual(0.3333333333333333);
+    expect(result.flexibleSpendingPercentage).toEqual(0.16666666666666666);
+    expect(result.savingsPercentage).toEqual(0.5);
+  });
+
+  it('CALCULATE_CATEGORY_TOTALS', () => {
+    const result = reducer(state, {
+      type: CALCULATE_CATEGORY_TOTALS,
+    });
+    expect(result.fixedCostsTotal).toEqual(1000);
+    expect(result.flexibleSpendingTotal).toEqual(500);
+    expect(result.savingsTotal).toEqual(1500);
   });
 });
