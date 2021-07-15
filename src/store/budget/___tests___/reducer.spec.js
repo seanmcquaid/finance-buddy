@@ -1,7 +1,10 @@
 import {
+  ADD_FIXED_COST_ENTRY,
   CALCULATE_REMAINING_AMOUNT,
   CALCULATE_TOTAL_PERCENTAGE,
+  DELETE_FIXED_COST_ENTRY,
   SET_TOTAL_BUDGET,
+  UPDATE_FIXED_COST_ENTRY,
 } from '../actionTypes';
 import reducer from '../reducer';
 
@@ -43,11 +46,38 @@ describe('budget reducer', () => {
     ).toEqual(0);
   });
 
-  it('ADD_FIXED_COST_ENTRY', () => {});
+  it('ADD_FIXED_COST_ENTRY', () => {
+    const result = reducer(state, {
+      type: ADD_FIXED_COST_ENTRY,
+      payload: { name: 'insurance' },
+    });
 
-  it('UPDATE_FIXED_COST_ENTRY', () => {});
+    expect(result.fixedCosts).toEqual({ rent: 1000, insurance: 0 });
+    expect(result.fixedCostsPercentage).toEqual(0.3333333333333333);
+    expect(result.fixedCostsTotal).toEqual(1000);
+  });
 
-  it('DELETE_FIXED_COST_ENTRY', () => {});
+  it('UPDATE_FIXED_COST_ENTRY', () => {
+    const result = reducer(state, {
+      type: UPDATE_FIXED_COST_ENTRY,
+      payload: { name: 'rent', amount: 800 },
+    });
+
+    expect(result.fixedCosts).toEqual({ rent: 800 });
+    expect(result.fixedCostsPercentage).toEqual(0.26666666666666666);
+    expect(result.fixedCostsTotal).toEqual(800);
+  });
+
+  it('DELETE_FIXED_COST_ENTRY', () => {
+    const result = reducer(state, {
+      type: DELETE_FIXED_COST_ENTRY,
+      payload: { name: 'rent' },
+    });
+
+    expect(result.fixedCosts).toEqual({});
+    expect(result.fixedCostsPercentage).toEqual(0);
+    expect(result.fixedCostsTotal).toEqual(0);
+  });
 
   it('ADD_FLEXIBLE_SPENDING_ENTRY', () => {});
 

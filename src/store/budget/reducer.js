@@ -72,18 +72,13 @@ const reducer = (state = initialState, action) => {
         ...state.fixedCosts,
         [action.payload.name]: 0,
       };
-      const updatedSpendingAfterAddedFixedCostEntry = calculateTotal(
-        updatedFixedCostsAfterAddingEntry,
-        state.flexibleSpending,
-        state.savings,
-      );
       return {
         ...state,
         fixedCosts: {
           ...updatedFixedCostsAfterAddingEntry,
         },
         fixedCostsPercentage: calculateCategoryPercentageOfBudget(
-          updatedSpendingAfterAddedFixedCostEntry,
+          calculateTotalForCategory(updatedFixedCostsAfterAddingEntry),
           state.totalBudget,
         ),
         fixedCostsTotal: calculateTotalForCategory(
@@ -95,18 +90,13 @@ const reducer = (state = initialState, action) => {
         ...state.fixedCosts,
         [action.payload.name]: action.payload.amount,
       };
-      const updatedSpendingAfterUpdatingFixedCostEntry = calculateTotal(
-        updatedFixedCostsAfterUpdatingEntry,
-        state.flexibleSpending,
-        state.savings,
-      );
       return {
         ...state,
         fixedCosts: {
           ...updatedFixedCostsAfterUpdatingEntry,
         },
         fixedCostsPercentage: calculateCategoryPercentageOfBudget(
-          updatedSpendingAfterUpdatingFixedCostEntry,
+          calculateTotalForCategory(updatedFixedCostsAfterUpdatingEntry),
           state.totalBudget,
         ),
         fixedCostsTotal: calculateTotalForCategory(
@@ -116,19 +106,13 @@ const reducer = (state = initialState, action) => {
     case DELETE_FIXED_COST_ENTRY:
       const updatedFixedCostsAfterDeletingEntry = { ...state.fixedCosts };
       delete updatedFixedCostsAfterDeletingEntry[action.payload.name];
-
-      const updatedSpendingAfterDeletingFixedCostEntry = calculateTotal(
-        updatedFixedCostsAfterDeletingEntry,
-        state.flexibleSpending,
-        state.savings,
-      );
       return {
         ...state,
         fixedCosts: {
           ...updatedFixedCostsAfterDeletingEntry,
         },
         fixedCostsPercentage: calculateCategoryPercentageOfBudget(
-          updatedSpendingAfterDeletingFixedCostEntry,
+          calculateTotalForCategory(updatedFixedCostsAfterDeletingEntry),
           state.totalBudget,
         ),
         fixedCostsTotal: calculateTotalForCategory(
