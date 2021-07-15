@@ -36,6 +36,8 @@ const initialState = {
   totalPercentage: 100,
 };
 
+// To do - create action for calcing each individual percentage and total and remove that logic from each add, update, delete action
+
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case SET_TOTAL_BUDGET:
@@ -124,18 +126,13 @@ const reducer = (state = initialState, action) => {
         ...state.flexibleSpending,
         [action.payload.name]: 0,
       };
-      const updatedSpendingAfterAddedFlexibleSpendingEntry = calculateTotal(
-        state.fixedCosts,
-        updatedFlexibleSpendingAfterAddingEntry,
-        state.savings,
-      );
       return {
         ...state,
         flexibleSpending: {
           ...updatedFlexibleSpendingAfterAddingEntry,
         },
         flexibleSpendingPercentage: calculateCategoryPercentageOfBudget(
-          updatedSpendingAfterAddedFlexibleSpendingEntry,
+          calculateTotalForCategory(updatedFlexibleSpendingAfterAddingEntry),
           state.totalBudget,
         ),
         flexibleSpendingTotal: calculateTotalForCategory(
@@ -147,18 +144,13 @@ const reducer = (state = initialState, action) => {
         ...state.flexibleSpending,
         [action.payload.name]: action.payload.amount,
       };
-      const updatedSpendingAfterUpdatingFlexibleSpendingEntry = calculateTotal(
-        state.fixedCosts,
-        updatedFlexibleSpendingAfterUpdatingEntry,
-        state.savings,
-      );
       return {
         ...state,
         flexibleSpending: {
           ...updatedFlexibleSpendingAfterUpdatingEntry,
         },
         flexibleSpendingPercentage: calculateCategoryPercentageOfBudget(
-          updatedSpendingAfterUpdatingFlexibleSpendingEntry,
+          calculateTotalForCategory(updatedFlexibleSpendingAfterUpdatingEntry),
           state.totalBudget,
         ),
         flexibleSpendingTotal: calculateTotalForCategory(
@@ -171,18 +163,13 @@ const reducer = (state = initialState, action) => {
       };
       delete updatedFlexibleSpendingAfterDeletingEntry[action.payload.name];
 
-      const updatedSpendingAfterDeletingFlexibleSpendingEntry = calculateTotal(
-        state.fixedCosts,
-        updatedFlexibleSpendingAfterDeletingEntry,
-        state.savings,
-      );
       return {
         ...state,
         flexibleSpending: {
           ...updatedFlexibleSpendingAfterDeletingEntry,
         },
         flexibleSpendingPercentage: calculateCategoryPercentageOfBudget(
-          updatedSpendingAfterDeletingFlexibleSpendingEntry,
+          calculateTotalForCategory(updatedFlexibleSpendingAfterDeletingEntry),
           state.totalBudget,
         ),
         flexibleSpendingTotal: calculateTotalForCategory(

@@ -1,10 +1,13 @@
 import {
   ADD_FIXED_COST_ENTRY,
+  ADD_FLEXIBLE_SPENDING_ENTRY,
   CALCULATE_REMAINING_AMOUNT,
   CALCULATE_TOTAL_PERCENTAGE,
   DELETE_FIXED_COST_ENTRY,
+  DELETE_FLEXIBLE_SPENDING_ENTRY,
   SET_TOTAL_BUDGET,
   UPDATE_FIXED_COST_ENTRY,
+  UPDATE_FLEXIBLE_SPENDING_ENTRY,
 } from '../actionTypes';
 import reducer from '../reducer';
 
@@ -79,11 +82,38 @@ describe('budget reducer', () => {
     expect(result.fixedCostsTotal).toEqual(0);
   });
 
-  it('ADD_FLEXIBLE_SPENDING_ENTRY', () => {});
+  it('ADD_FLEXIBLE_SPENDING_ENTRY', () => {
+    const result = reducer(state, {
+      type: ADD_FLEXIBLE_SPENDING_ENTRY,
+      payload: { name: 'shrimp' },
+    });
 
-  it('UPDATE_FLEXIBLE_SPENDING_ENTRY', () => {});
+    expect(result.flexibleSpending).toEqual({ food: 500, shrimp: 0 });
+    expect(result.flexibleSpendingPercentage).toEqual(0.16666666666666666);
+    expect(result.flexibleSpendingTotal).toEqual(500);
+  });
 
-  it('DELETE_FLEXIBLE_SPENDING_ENTRY', () => {});
+  it('UPDATE_FLEXIBLE_SPENDING_ENTRY', () => {
+    const result = reducer(state, {
+      type: UPDATE_FLEXIBLE_SPENDING_ENTRY,
+      payload: { name: 'food', amount: 800 },
+    });
+
+    expect(result.flexibleSpending).toEqual({ food: 800 });
+    expect(result.flexibleSpendingPercentage).toEqual(0.26666666666666666);
+    expect(result.flexibleSpendingTotal).toEqual(800);
+  });
+
+  it('DELETE_FLEXIBLE_SPENDING_ENTRY', () => {
+    const result = reducer(state, {
+      type: DELETE_FLEXIBLE_SPENDING_ENTRY,
+      payload: { name: 'food' },
+    });
+
+    expect(result.flexibleSpending).toEqual({});
+    expect(result.flexibleSpendingPercentage).toEqual(0);
+    expect(result.flexibleSpendingTotal).toEqual(0);
+  });
 
   it('ADD_SAVINGS_ENTRY', () => {});
 
