@@ -2,6 +2,8 @@ import {
   ADD_FIXED_COST_ENTRY,
   ADD_FLEXIBLE_SPENDING_ENTRY,
   ADD_SAVINGS_ENTRY,
+  CALCULATE_CATEGORY_PERCENTAGES,
+  CALCULATE_CATEGORY_TOTALS,
   CALCULATE_REMAINING_AMOUNT,
   CALCULATE_TOTAL_PERCENTAGE,
   DELETE_FIXED_COST_ENTRY,
@@ -24,6 +26,14 @@ export const calculateTotalPercentage = () => ({
 
 export const calculateRemainingAmount = () => ({
   type: CALCULATE_REMAINING_AMOUNT,
+});
+
+export const calculateCategoryPercentages = () => ({
+  type: CALCULATE_CATEGORY_PERCENTAGES,
+});
+
+export const calculateCategoryTotals = () => ({
+  type: CALCULATE_CATEGORY_TOTALS,
 });
 
 export const addFixedCostEntry = (name) => ({

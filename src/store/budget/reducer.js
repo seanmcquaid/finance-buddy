@@ -10,6 +10,8 @@ import {
   ADD_FIXED_COST_ENTRY,
   ADD_FLEXIBLE_SPENDING_ENTRY,
   ADD_SAVINGS_ENTRY,
+  CALCULATE_CATEGORY_PERCENTAGES,
+  CALCULATE_CATEGORY_TOTALS,
   CALCULATE_REMAINING_AMOUNT,
   CALCULATE_TOTAL_PERCENTAGE,
   DELETE_FIXED_COST_ENTRY,
@@ -36,8 +38,6 @@ const initialState = {
   totalPercentage: 100,
 };
 
-// To do - create action for calcing each individual percentage and total and remove that logic from each add, update, delete action
-
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case SET_TOTAL_BUDGET:
@@ -46,14 +46,13 @@ const reducer = (state = initialState, action) => {
         totalBudget: action.payload.total,
       };
     case CALCULATE_TOTAL_PERCENTAGE:
-      const totalPercentage = calculateTotalPercentage(
-        state.fixedCostsPercentage,
-        state.flexibleSpendingPercentage,
-        state.savingsPercentage,
-      );
       return {
         ...state,
-        totalPercentage,
+        totalPercentage: calculateTotalPercentage(
+          state.fixedCostsPercentage,
+          state.flexibleSpendingPercentage,
+          state.savingsPercentage,
+        ),
       };
     case CALCULATE_REMAINING_AMOUNT:
       const total = calculateTotal(
@@ -61,49 +60,50 @@ const reducer = (state = initialState, action) => {
         calculateTotalForCategory(state.flexibleSpending),
         calculateTotalForCategory(state.savings),
       );
-      const remainingAmount = calculateRemainingAmount(
-        state.totalBudget,
-        total,
-      );
       return {
         ...state,
-        remainingAmount,
+        remainingAmount: calculateRemainingAmount(state.totalBudget, total),
+      };
+    case CALCULATE_CATEGORY_PERCENTAGES:
+      return {
+        ...state,
+        fixedCostsPercentage: calculateCategoryPercentageOfBudget(
+          calculateTotalForCategory(state.fixedCosts),
+          state.totalBudget,
+        ),
+        flexibleSpendingPercentage: calculateCategoryPercentageOfBudget(
+          calculateTotalForCategory(state.flexibleSpending),
+          state.totalBudget,
+        ),
+        savingsPercentage: calculateCategoryPercentageOfBudget(
+          calculateTotalForCategory(state.savings),
+          state.totalBudget,
+        ),
+      };
+    case CALCULATE_CATEGORY_TOTALS:
+      return {
+        ...state,
+        fixedCostsTotal: calculateTotalForCategory(state.fixedCosts),
+        flexibleSpendingTotal: calculateTotalForCategory(
+          state.flexibleSpending,
+        ),
+        savingsTotal: calculateTotalForCategory(state.savings),
       };
     case ADD_FIXED_COST_ENTRY:
-      const updatedFixedCostsAfterAddingEntry = {
-        ...state.fixedCosts,
-        [action.payload.name]: 0,
-      };
       return {
         ...state,
         fixedCosts: {
-          ...updatedFixedCostsAfterAddingEntry,
+          ...state.fixedCosts,
+          [action.payload.name]: 0,
         },
-        fixedCostsPercentage: calculateCategoryPercentageOfBudget(
-          calculateTotalForCategory(updatedFixedCostsAfterAddingEntry),
-          state.totalBudget,
-        ),
-        fixedCostsTotal: calculateTotalForCategory(
-          updatedFixedCostsAfterAddingEntry,
-        ),
       };
     case UPDATE_FIXED_COST_ENTRY:
-      const updatedFixedCostsAfterUpdatingEntry = {
-        ...state.fixedCosts,
-        [action.payload.name]: action.payload.amount,
-      };
       return {
         ...state,
         fixedCosts: {
-          ...updatedFixedCostsAfterUpdatingEntry,
+          ...state.fixedCosts,
+          [action.payload.name]: action.payload.amount,
         },
-        fixedCostsPercentage: calculateCategoryPercentageOfBudget(
-          calculateTotalForCategory(updatedFixedCostsAfterUpdatingEntry),
-          state.totalBudget,
-        ),
-        fixedCostsTotal: calculateTotalForCategory(
-          updatedFixedCostsAfterUpdatingEntry,
-        ),
       };
     case DELETE_FIXED_COST_ENTRY:
       const updatedFixedCostsAfterDeletingEntry = { ...state.fixedCosts };
@@ -113,49 +113,22 @@ const reducer = (state = initialState, action) => {
         fixedCosts: {
           ...updatedFixedCostsAfterDeletingEntry,
         },
-        fixedCostsPercentage: calculateCategoryPercentageOfBudget(
-          calculateTotalForCategory(updatedFixedCostsAfterDeletingEntry),
-          state.totalBudget,
-        ),
-        fixedCostsTotal: calculateTotalForCategory(
-          updatedFixedCostsAfterDeletingEntry,
-        ),
       };
     case ADD_FLEXIBLE_SPENDING_ENTRY:
-      const updatedFlexibleSpendingAfterAddingEntry = {
-        ...state.flexibleSpending,
-        [action.payload.name]: 0,
-      };
       return {
         ...state,
         flexibleSpending: {
-          ...updatedFlexibleSpendingAfterAddingEntry,
+          ...state.flexibleSpending,
+          [action.payload.name]: 0,
         },
-        flexibleSpendingPercentage: calculateCategoryPercentageOfBudget(
-          calculateTotalForCategory(updatedFlexibleSpendingAfterAddingEntry),
-          state.totalBudget,
-        ),
-        flexibleSpendingTotal: calculateTotalForCategory(
-          updatedFlexibleSpendingAfterAddingEntry,
-        ),
       };
     case UPDATE_FLEXIBLE_SPENDING_ENTRY:
-      const updatedFlexibleSpendingAfterUpdatingEntry = {
-        ...state.flexibleSpending,
-        [action.payload.name]: action.payload.amount,
-      };
       return {
         ...state,
         flexibleSpending: {
-          ...updatedFlexibleSpendingAfterUpdatingEntry,
+          ...state.flexibleSpending,
+          [action.payload.name]: action.payload.amount,
         },
-        flexibleSpendingPercentage: calculateCategoryPercentageOfBudget(
-          calculateTotalForCategory(updatedFlexibleSpendingAfterUpdatingEntry),
-          state.totalBudget,
-        ),
-        flexibleSpendingTotal: calculateTotalForCategory(
-          updatedFlexibleSpendingAfterUpdatingEntry,
-        ),
       };
     case DELETE_FLEXIBLE_SPENDING_ENTRY:
       const updatedFlexibleSpendingAfterDeletingEntry = {
@@ -168,57 +141,22 @@ const reducer = (state = initialState, action) => {
         flexibleSpending: {
           ...updatedFlexibleSpendingAfterDeletingEntry,
         },
-        flexibleSpendingPercentage: calculateCategoryPercentageOfBudget(
-          calculateTotalForCategory(updatedFlexibleSpendingAfterDeletingEntry),
-          state.totalBudget,
-        ),
-        flexibleSpendingTotal: calculateTotalForCategory(
-          updatedFlexibleSpendingAfterDeletingEntry,
-        ),
       };
     case ADD_SAVINGS_ENTRY:
-      const updatedSavingsAfterAddingEntry = {
-        ...state.savings,
-        [action.payload.name]: 0,
-      };
-      const updatedSpendingAfterAddedSavingsEntry = calculateTotal(
-        state.fixedCosts,
-        state.flexibleSpending,
-        updatedSavingsAfterAddingEntry,
-      );
       return {
         ...state,
         savings: {
-          ...updatedSavingsAfterAddingEntry,
+          ...state.savings,
+          [action.payload.name]: 0,
         },
-        savingsPercentage: calculateCategoryPercentageOfBudget(
-          updatedSpendingAfterAddedSavingsEntry,
-          state.totalBudget,
-        ),
-        savingsTotal: calculateTotalForCategory(updatedSavingsAfterAddingEntry),
       };
     case UPDATE_SAVINGS_ENTRY:
-      const updatedSavingsAfterUpdatingEntry = {
-        ...state.savings,
-        [action.payload.name]: action.payload.amount,
-      };
-      const updatedSpendingAfterUpdatingSavingsEntry = calculateTotal(
-        state.fixedCosts,
-        state.flexibleSpending,
-        updatedSavingsAfterUpdatingEntry,
-      );
       return {
         ...state,
         savings: {
-          ...updatedSavingsAfterUpdatingEntry,
+          ...state.savings,
+          [action.payload.name]: action.payload.amount,
         },
-        savingsPercentage: calculateCategoryPercentageOfBudget(
-          updatedSpendingAfterUpdatingSavingsEntry,
-          state.totalBudget,
-        ),
-        savingsTotal: calculateTotalForCategory(
-          updatedSavingsAfterUpdatingEntry,
-        ),
       };
     case DELETE_SAVINGS_ENTRY:
       const updatedSavingsAfterDeletingEntry = {
@@ -226,23 +164,11 @@ const reducer = (state = initialState, action) => {
       };
       delete updatedSavingsAfterDeletingEntry[action.payload.name];
 
-      const updatedSpendingAfterDeletingSavingsEntry = calculateTotal(
-        state.fixedCosts,
-        state.flexibleSpending,
-        updatedSavingsAfterDeletingEntry,
-      );
       return {
         ...state,
         savings: {
           ...updatedSavingsAfterDeletingEntry,
         },
-        savingsPercentage: calculateCategoryPercentageOfBudget(
-          updatedSpendingAfterDeletingSavingsEntry,
-          state.totalBudget,
-        ),
-        savingsTotal: calculateTotalForCategory(
-          updatedSavingsAfterDeletingEntry,
-        ),
       };
     default:
       return {
