@@ -1,5 +1,9 @@
 import configureMockStore from '../../../testUtils/configureMockStore';
-import { setTotalBudgetAction } from '../actions';
+import {
+  addFixedCostEntryAction,
+  addFlexibleSpendingEntryAction,
+  setTotalBudgetAction,
+} from '../actions';
 
 describe('budget actions', () => {
   const state = {
@@ -32,9 +36,33 @@ describe('budget actions', () => {
     expect(result).toEqual(store.getActions());
   });
 
-  it('addFixedCostEntryAction', () => {});
+  it('addFixedCostEntryAction', () => {
+    store.dispatch(addFixedCostEntryAction('rent'));
 
-  it('addFlexibleSpendingEntryAction', () => {});
+    const result = [
+      { type: 'ADD_FIXED_COST_ENTRY', payload: { name: 'rent' } },
+      { type: 'CALCULATE_CATEGORY_PERCENTAGES' },
+      { type: 'CALCULATE_CATEGORY_TOTALS' },
+      { type: 'CALCULATE_TOTAL_PERCENTAGE' },
+      { type: 'CALCULATE_REMAINING_AMOUNT' },
+    ];
+
+    expect(result).toEqual(store.getActions());
+  });
+
+  it('addFlexibleSpendingEntryAction', () => {
+    store.dispatch(addFlexibleSpendingEntryAction('food'));
+
+    const result = [
+      { type: 'ADD_FlEXIBLE_SPENDING_ENTRY', payload: { name: 'food' } },
+      { type: 'CALCULATE_CATEGORY_PERCENTAGES' },
+      { type: 'CALCULATE_CATEGORY_TOTALS' },
+      { type: 'CALCULATE_TOTAL_PERCENTAGE' },
+      { type: 'CALCULATE_REMAINING_AMOUNT' },
+    ];
+
+    expect(result).toEqual(store.getActions());
+  });
 
   it('addSavingsEntryAction', () => {});
 
