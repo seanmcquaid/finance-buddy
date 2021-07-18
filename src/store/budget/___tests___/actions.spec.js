@@ -3,9 +3,13 @@ import {
   addFixedCostEntryAction,
   addFlexibleSpendingEntryAction,
   addSavingsEntryAction,
+  deleteFixedCostEntryAction,
+  deleteFlexibleSpendingEntryAction,
+  deleteSavingsEntryAction,
   setTotalBudgetAction,
   updateFixedCostEntryAction,
   updateFlexibleSpendingEntryAction,
+  updateSavingsEntryAction,
 } from '../actions';
 
 describe('budget actions', () => {
@@ -112,16 +116,68 @@ describe('budget actions', () => {
       { type: 'CALCULATE_REMAINING_AMOUNT' },
     ];
 
-    console.log(store.getActions());
+    expect(result).toEqual(store.getActions());
+  });
+
+  it('updateSavingsEntryAction', () => {
+    store.dispatch(updateSavingsEntryAction('savings', 100));
+
+    const result = [
+      {
+        type: 'UPDATE_SAVINGS_ENTRY',
+        payload: { name: 'savings', amount: 100 },
+      },
+      { type: 'CALCULATE_CATEGORY_PERCENTAGES' },
+      { type: 'CALCULATE_CATEGORY_TOTALS' },
+      { type: 'CALCULATE_TOTAL_PERCENTAGE' },
+      { type: 'CALCULATE_REMAINING_AMOUNT' },
+    ];
 
     expect(result).toEqual(store.getActions());
   });
 
-  it('updateSavingsEntryAction', () => {});
+  it('deleteFixedCostEntryAction', () => {
+    store.dispatch(deleteFixedCostEntryAction('savings'));
 
-  it('deleteFixedCostEntryAction', () => {});
+    const result = [
+      { type: 'DELETE_FIXED_COST_ENTRY', payload: { name: 'savings' } },
+      { type: 'CALCULATE_CATEGORY_PERCENTAGES' },
+      { type: 'CALCULATE_CATEGORY_TOTALS' },
+      { type: 'CALCULATE_TOTAL_PERCENTAGE' },
+      { type: 'CALCULATE_REMAINING_AMOUNT' },
+    ];
 
-  it('deleteFlexibleSpendingEntryAction', () => {});
+    expect(result).toEqual(store.getActions());
+  });
 
-  it('deleteSavingsEntryAction', () => {});
+  it('deleteFlexibleSpendingEntryAction', () => {
+    store.dispatch(deleteFlexibleSpendingEntryAction('flexibleSpending'));
+
+    const result = [
+      {
+        type: 'DELETE_FlEXIBLE_SPENDING_ENTRY',
+        payload: { name: 'flexibleSpending' },
+      },
+      { type: 'CALCULATE_CATEGORY_PERCENTAGES' },
+      { type: 'CALCULATE_CATEGORY_TOTALS' },
+      { type: 'CALCULATE_TOTAL_PERCENTAGE' },
+      { type: 'CALCULATE_REMAINING_AMOUNT' },
+    ];
+
+    expect(result).toEqual(store.getActions());
+  });
+
+  it('deleteSavingsEntryAction', () => {
+    store.dispatch(deleteSavingsEntryAction('savings'));
+
+    const result = [
+      { type: 'DELETE_SAVINGS_ENTRY', payload: { name: 'savings' } },
+      { type: 'CALCULATE_CATEGORY_PERCENTAGES' },
+      { type: 'CALCULATE_CATEGORY_TOTALS' },
+      { type: 'CALCULATE_TOTAL_PERCENTAGE' },
+      { type: 'CALCULATE_REMAINING_AMOUNT' },
+    ];
+
+    expect(result).toEqual(store.getActions());
+  });
 });
