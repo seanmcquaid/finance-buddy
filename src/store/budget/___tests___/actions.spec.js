@@ -2,7 +2,10 @@ import configureMockStore from '../../../testUtils/configureMockStore';
 import {
   addFixedCostEntryAction,
   addFlexibleSpendingEntryAction,
+  addSavingsEntryAction,
   setTotalBudgetAction,
+  updateFixedCostEntryAction,
+  updateFlexibleSpendingEntryAction,
 } from '../actions';
 
 describe('budget actions', () => {
@@ -64,11 +67,55 @@ describe('budget actions', () => {
     expect(result).toEqual(store.getActions());
   });
 
-  it('addSavingsEntryAction', () => {});
+  it('addSavingsEntryAction', () => {
+    store.dispatch(addSavingsEntryAction('savings'));
 
-  it('updateFixedCostEntryAction', () => {});
+    const result = [
+      { type: 'ADD_SAVINGS_ENTRY', payload: { name: 'savings' } },
+      { type: 'CALCULATE_CATEGORY_PERCENTAGES' },
+      { type: 'CALCULATE_CATEGORY_TOTALS' },
+      { type: 'CALCULATE_TOTAL_PERCENTAGE' },
+      { type: 'CALCULATE_REMAINING_AMOUNT' },
+    ];
 
-  it('updateFlexibleSpendingEntryAction', () => {});
+    expect(result).toEqual(store.getActions());
+  });
+
+  it('updateFixedCostEntryAction', () => {
+    store.dispatch(updateFixedCostEntryAction('fixedCost', 100));
+
+    const result = [
+      {
+        type: 'UPDATE_FIXED_COST_ENTRY',
+        payload: { name: 'fixedCost', amount: 100 },
+      },
+      { type: 'CALCULATE_CATEGORY_PERCENTAGES' },
+      { type: 'CALCULATE_CATEGORY_TOTALS' },
+      { type: 'CALCULATE_TOTAL_PERCENTAGE' },
+      { type: 'CALCULATE_REMAINING_AMOUNT' },
+    ];
+
+    expect(result).toEqual(store.getActions());
+  });
+
+  it('updateFlexibleSpendingEntryAction', () => {
+    store.dispatch(updateFlexibleSpendingEntryAction('flexibleSpending', 100));
+
+    const result = [
+      {
+        type: 'UPDATE_FlEXIBLE_SPENDING_ENTRY',
+        payload: { name: 'flexibleSpending', amount: 100 },
+      },
+      { type: 'CALCULATE_CATEGORY_PERCENTAGES' },
+      { type: 'CALCULATE_CATEGORY_TOTALS' },
+      { type: 'CALCULATE_TOTAL_PERCENTAGE' },
+      { type: 'CALCULATE_REMAINING_AMOUNT' },
+    ];
+
+    console.log(store.getActions());
+
+    expect(result).toEqual(store.getActions());
+  });
 
   it('updateSavingsEntryAction', () => {});
 
