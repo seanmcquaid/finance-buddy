@@ -16,15 +16,17 @@ const validationSchema = Yup.object().shape({
 
 const TotalBudgetForm = () => {
   const dispatch = useDispatch();
-  const { handleSubmit, handleChange, values, errors } = useFormik({
-    initialValues: {
-      totalBudget: '0',
-    },
-    validationSchema,
-    onSubmit: (values) => {
-      dispatch(setTotalBudgetAction(Number.parseInt(values.totalBudget)));
-    },
-  });
+  const { handleSubmit, handleChange, values, errors, setFieldValue } =
+    useFormik({
+      initialValues: {
+        totalBudget: '0',
+      },
+      validationSchema,
+      onSubmit: (values) => {
+        dispatch(setTotalBudgetAction(Number.parseInt(values.totalBudget)));
+        setFieldValue('totalBudget', '0');
+      },
+    });
 
   return (
     <Form onSubmit={handleSubmit}>
