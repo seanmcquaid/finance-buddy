@@ -3,47 +3,48 @@ import styled from 'styled-components';
 import { Button, TextInput } from '../../../components';
 import * as Yup from 'yup';
 import { useDispatch } from 'react-redux';
-import { setTotalBudgetAction } from '../../../store/budget/actions';
+import { addFixedCostEntryAction } from '../../../store/budget/actions';
 import { digitsOnly } from '../../../utils/formValidationUtils';
 
 const validationSchema = Yup.object().shape({
-  totalBudget: Yup.string().test(
+  fixedCostName: Yup.string(),
+  fixedCostAmount: Yup.string().test(
     'Digits only',
     'This field should have digits only',
     digitsOnly,
   ),
 });
 
-const TotalBudgetForm = () => {
+const FixedCostForm = () => {
   const dispatch = useDispatch();
   const { handleSubmit, handleChange, values, errors, setFieldValue } =
     useFormik({
       initialValues: {
-        totalBudget: '0',
+        fixedCostName: '',
+        fixedCostAmount: '0',
       },
       validationSchema,
-      onSubmit: (values) => {
-        dispatch(setTotalBudgetAction(Number.parseInt(values.totalBudget)));
-        setFieldValue('totalBudget', '0');
-      },
+      onSubmit: (values) => {},
     });
 
   return (
     <Form onSubmit={handleSubmit}>
-      {errors.totalBudget && (
-        <TotalBudgetErrorMessage>{errors.totalBudget}</TotalBudgetErrorMessage>
+      {errors.fixedCostName && (
+        <FixedCostNameErrorMessage>
+          {errors.fixedCostName}
+        </FixedCostNameErrorMessage>
       )}
       <TextInput
         onChange={handleChange}
-        name="totalBudget"
-        label="Total Budget"
+        name="fixedCostName"
+        label="Fixed Cost Name"
         type="text"
-        value={values.totalBudget}
+        value={values.fixedCostName}
       />
       <Button
         type="submit"
-        label="Set Total Budget"
-        disabled={!!errors.totalBudget}
+        label="Add Fixed Cost Entry"
+        disabled={!!errors.fixedCostName && !!errors.fixedCostAmount}
       />
     </Form>
   );
@@ -51,6 +52,6 @@ const TotalBudgetForm = () => {
 
 const Form = styled.form``;
 
-const TotalBudgetErrorMessage = styled.span``;
+const FixedCostNameErrorMessage = styled.span``;
 
-export default TotalBudgetForm;
+export default FixedCostForm;
