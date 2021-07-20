@@ -23,7 +23,6 @@ const TotalBudgetForm = () => {
     },
     validationSchema,
     onSubmit: (values) => {
-      console.log(values);
       dispatch(setTotalBudgetAction(Number.parseInt(values.totalBudget)));
     },
   });
