@@ -4,8 +4,7 @@ import { Button, TextInput } from '../../../components';
 import * as Yup from 'yup';
 import { useDispatch } from 'react-redux';
 import { setTotalBudgetAction } from '../../../store/budget/actions';
-
-const digitsOnly = (value) => /^\d+$/.test(value);
+import { digitsOnly } from '../../../utils/formValidationUtils';
 
 const validationSchema = Yup.object().shape({
   totalBudget: Yup.string().test(
