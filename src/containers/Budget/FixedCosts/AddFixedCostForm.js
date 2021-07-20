@@ -4,35 +4,36 @@ import { Button, TextInput } from '../../../components';
 import * as Yup from 'yup';
 import { useDispatch } from 'react-redux';
 import { addFixedCostEntryAction } from '../../../store/budget/actions';
-import { digitsOnly } from '../../../utils/formValidationUtils';
+import { atLeastOneCharacter } from '../../../utils/formValidationUtils';
 
 const validationSchema = Yup.object().shape({
-  fixedCostName: Yup.string(),
-  fixedCostAmount: Yup.string().test(
-    'Digits only',
-    'This field should have digits only',
-    digitsOnly,
+  fixedCostName: Yup.string().test(
+    'At least one character',
+    'This field needs a name that is greater than one character',
+    atLeastOneCharacter,
   ),
 });
 
-const FixedCostForm = () => {
+const AddFixedCostForm = () => {
   const dispatch = useDispatch();
   const { handleSubmit, handleChange, values, errors, setFieldValue } =
     useFormik({
       initialValues: {
         fixedCostName: '',
-        fixedCostAmount: '0',
       },
       validationSchema,
-      onSubmit: (values) => {},
+      onSubmit: (values) => {
+        dispatch(addFixedCostEntryAction(values.fixedCostName));
+        setFieldValue('fixedCostName', '');
+      },
     });
 
   return (
     <Form onSubmit={handleSubmit}>
       {errors.fixedCostName && (
-        <FixedCostNameErrorMessage>
+        <FixedCostInfoErrorMessage>
           {errors.fixedCostName}
-        </FixedCostNameErrorMessage>
+        </FixedCostInfoErrorMessage>
       )}
       <TextInput
         onChange={handleChange}
@@ -44,7 +45,7 @@ const FixedCostForm = () => {
       <Button
         type="submit"
         label="Add Fixed Cost Entry"
-        disabled={!!errors.fixedCostName && !!errors.fixedCostAmount}
+        disabled={!!errors.fixedCostName}
       />
     </Form>
   );
@@ -52,6 +53,6 @@ const FixedCostForm = () => {
 
 const Form = styled.form``;
 
-const FixedCostNameErrorMessage = styled.span``;
+const FixedCostInfoErrorMessage = styled.span``;
 
-export default FixedCostForm;
+export default AddFixedCostForm;
