@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { H1 } from '../../components';
+import FixedCosts from './FixedCosts';
 import TotalBudgetForm from './TotalBudgetForm';
 import TotalBudgetInfo from './TotalBudgetInfo';
 
@@ -11,6 +12,7 @@ const Budget = () => (
     <Main>
       <TotalBudgetInfo />
       <TotalBudgetForm />
+      <FixedCosts />
     </Main>
   </PageContainer>
 );
