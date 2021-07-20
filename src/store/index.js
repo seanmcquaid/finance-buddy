@@ -9,7 +9,7 @@ import persistReducer from 'redux-persist/es/persistReducer';
 import persistStore from 'redux-persist/es/persistStore';
 
 const rootReducer = combineReducers({
-  budgetReducer: budgetReducer,
+  budget: budgetReducer,
   mortgage: mortgageReducer,
   retirement: retirementReducer,
 });
