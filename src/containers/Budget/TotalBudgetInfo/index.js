@@ -16,7 +16,7 @@ const TotalBudgetInfo = () => {
     <TotalBudgetInfoContainer>
       <P>Total Budget : {totalBudget}</P>
       <P>Remaining Amount : {remainingAmount}</P>
-      <P>Percentage Accounted For : {totalPercentage}</P>
+      <P>Percentage Accounted For : {totalPercentage}%</P>
     </TotalBudgetInfoContainer>
   );
 };

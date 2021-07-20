@@ -1,9 +1,12 @@
 import styled from 'styled-components';
+import TotalBudgetInfo from './TotalBudgetInfo';
 
 const Budget = () => (
   <PageContainer>
-    <Header></Header>
-    <Main></Main>
+    <Header>Budget Calculator</Header>
+    <Main>
+      <TotalBudgetInfo />
+    </Main>
   </PageContainer>
 );
 
