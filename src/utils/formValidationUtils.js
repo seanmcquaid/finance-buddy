@@ -1,3 +1,3 @@
 export const digitsOnly = (value) => /^\d+$/.test(value);
 
-export const atLeastOneCharacter = (value) => value.length >= 1;
+export const atLeastOneCharacter = (value) => value?.length >= 1 ?? false;
