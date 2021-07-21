@@ -28,8 +28,6 @@ const AddFixedCostForm = () => {
       },
     });
 
-  console.log(values.fixedCostName);
-
   return (
     <Form onSubmit={handleSubmit}>
       {errors.fixedCostName && (
