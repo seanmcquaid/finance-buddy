@@ -14,6 +14,11 @@ export const fixedCostsSelector = createSelector(budgetSelector, (budget) =>
   })),
 );
 
+export const fixedCostsAsObjectSelector = createSelector(
+  budgetSelector,
+  (budget) => budget.fixedCosts,
+);
+
 export const fixedCostsTotalSelector = createSelector(
   budgetSelector,
   (budget) => budget.fixedCostsTotal,
