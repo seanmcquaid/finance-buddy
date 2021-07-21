@@ -4,10 +4,25 @@ import { fixedCostsSelector } from '../../../store/budget/selectors';
 
 const FixedCostsEntries = () => {
   const entries = useSelector(fixedCostsSelector);
-  console.log(entries);
-  return <FixedCostsEntriesContainer></FixedCostsEntriesContainer>;
+
+  // to do - include delete button action
+  // to do - include update input action
+
+  return (
+    <FixedCostsEntriesContainer>
+      {entries.map(({ name }, i) => (
+        <Entry key={i}>
+          <EntryName>{name}</EntryName>
+        </Entry>
+      ))}
+    </FixedCostsEntriesContainer>
+  );
 };
 
 const FixedCostsEntriesContainer = styled.ul``;
+
+const Entry = styled.li``;
+
+const EntryName = styled.span``;
 
 export default FixedCostsEntries;

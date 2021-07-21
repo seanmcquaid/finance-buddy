@@ -1,9 +1,9 @@
 export const calculateCategoryPercentageOfBudget = (categoryTotal, total) =>
-  categoryTotal / total;
+  total === 0 ? 0 : categoryTotal / total;
 
 export const calculateTotalForCategory = (categoryEntries = {}) =>
-  categoryEntries
-    .map((entry) => entry.amount)
+  Object.entries(categoryEntries)
+    .map((entry) => entry[1])
     .reduce((accumulator, currentValue) => accumulator + currentValue, 0);
 
 export const calculateTotal = (fixed, flexible, savings) =>

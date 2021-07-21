@@ -11,6 +11,10 @@ describe('budgetUtils', () => {
     expect(calculateCategoryPercentageOfBudget(100, 1000)).toEqual(0.1);
   });
 
+  it('calculateCategoryPercentageOfBudget with zero total returns 0', () => {
+    expect(calculateCategoryPercentageOfBudget(100, 0)).toEqual(0);
+  });
+
   it('calculateTotalForCategory', () => {
     expect(calculateTotalForCategory({ rent: 500, insurance: 20 })).toEqual(
       520,
