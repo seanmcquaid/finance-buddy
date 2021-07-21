@@ -65,7 +65,7 @@ describe('budget selectors', () => {
   });
 
   it('fixedCostsSelector', () => {
-    expect(fixedCostsSelector(state)).toEqual([{ rent: 800 }]);
+    expect(fixedCostsSelector(state)).toEqual([{ name: 'rent', amount: 800 }]);
   });
 
   it('fixedCostsTotalSelector', () => {
@@ -77,7 +77,9 @@ describe('budget selectors', () => {
   });
 
   it('flexibleSpendingSelector', () => {
-    expect(flexibleSpendingSelector(state)).toEqual([{ cards: 200 }]);
+    expect(flexibleSpendingSelector(state)).toEqual([
+      { name: 'cards', amount: 200 },
+    ]);
   });
 
   it('flexibleSpendingTotalSelector', () => {
@@ -89,7 +91,7 @@ describe('budget selectors', () => {
   });
 
   it('savingsSelector', () => {
-    expect(savingsSelector(state)).toEqual([{ chase: 2000 }]);
+    expect(savingsSelector(state)).toEqual([{ name: 'chase', amount: 2000 }]);
   });
 
   it('savingsTotalSelector', () => {
