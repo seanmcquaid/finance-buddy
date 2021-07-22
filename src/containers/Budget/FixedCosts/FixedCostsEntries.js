@@ -5,6 +5,7 @@ import {
   fixedCostsSelector,
 } from '../../../store/budget/selectors';
 import { deleteFixedCostEntryAction } from '../../../store/budget/actions';
+import { Button } from '../../../components';
 
 const FixedCostsEntries = () => {
   const entriesList = useSelector(fixedCostsSelector);
@@ -22,6 +23,11 @@ const FixedCostsEntries = () => {
       {entriesList.map(({ name }, i) => (
         <Entry key={i}>
           <EntryName>{name}</EntryName>
+          <Button
+            onClick={() => deleteButtonOnClick(name)}
+            label="Delete"
+            type="button"
+          />
         </Entry>
       ))}
     </FixedCostsEntriesContainer>
