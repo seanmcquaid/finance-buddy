@@ -24,7 +24,7 @@ const AddFixedCostForm = () => {
       validationSchema,
       onSubmit: (values) => {
         dispatch(addFixedCostEntryAction(values.fixedCostName));
-        setFieldValue('fixedCostName', '');
+        setFieldValue('fixedCostName', ' ');
       },
     });
 
