@@ -27,8 +27,10 @@ const FixedCostsEntries = () => {
       }));
       setErrorMessage('');
       dispatch(
-        updateFixedCostEntryAction(event.target.name),
-        Number.parseInt(event.target.value),
+        updateFixedCostEntryAction(
+          event.target.name,
+          Number.parseInt(event.target.value),
+        ),
       );
     } else {
       setErrorMessage('Please enter only numbers');
