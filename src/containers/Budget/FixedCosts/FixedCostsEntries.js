@@ -1,8 +1,8 @@
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import {
-  fixedCostsAsObjectSelector,
-  fixedCostsSelector,
+  fixedCostsEntriesAsObjectSelector,
+  fixedCostsEntriesSelector,
 } from '../../../store/budget/selectors';
 import {
   deleteFixedCostEntryAction,
@@ -13,8 +13,8 @@ import { useState } from 'react';
 import { digitsOnly } from '../../../utils/formValidationUtils';
 
 const FixedCostsEntries = () => {
-  const entriesList = useSelector(fixedCostsSelector);
-  const entriesObject = useSelector(fixedCostsAsObjectSelector);
+  const entriesList = useSelector(fixedCostsEntriesSelector);
+  const entriesObject = useSelector(fixedCostsEntriesAsObjectSelector);
   const dispatch = useDispatch();
   const [state, setState] = useState(entriesObject);
   const [errorMessage, setErrorMessage] = useState('');

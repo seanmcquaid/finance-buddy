@@ -1,8 +1,8 @@
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import {
-  flexibleSpendingAsObjectSelector,
-  flexibleSpendingSelector,
+  flexibleSpendingAsEntriesObjectSelector,
+  flexibleSpendingEntriesSelector,
 } from '../../../store/budget/selectors';
 import {
   deleteFlexibleSpendingEntryAction,
@@ -13,8 +13,8 @@ import { useState } from 'react';
 import { digitsOnly } from '../../../utils/formValidationUtils';
 
 const FlexibleSpendingEntries = () => {
-  const entriesList = useSelector(flexibleSpendingSelector);
-  const entriesObject = useSelector(flexibleSpendingAsObjectSelector);
+  const entriesList = useSelector(flexibleSpendingEntriesSelector);
+  const entriesObject = useSelector(flexibleSpendingAsEntriesObjectSelector);
   const dispatch = useDispatch();
   const [state, setState] = useState(entriesObject);
   const [errorMessage, setErrorMessage] = useState('');
