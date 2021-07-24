@@ -15,7 +15,7 @@ import {
   calculateCategoryTotals,
 } from './actionCreators';
 
-export const calculateTotals = () => (dispatch) => {
+export const calculateTotalsAction = () => (dispatch) => {
   dispatch(calculateCategoryPercentages());
   dispatch(calculateCategoryTotals());
   dispatch(calculateTotalPercentage());
@@ -24,51 +24,51 @@ export const calculateTotals = () => (dispatch) => {
 
 export const setTotalBudgetAction = (total) => (dispatch) => {
   dispatch(setTotalBudget(total));
-  dispatch(calculateTotals());
+  dispatch(calculateTotalsAction());
 };
 
 export const addFixedCostEntryAction = (name) => (dispatch) => {
   dispatch(addFixedCostEntry(name));
-  dispatch(calculateTotals());
+  dispatch(calculateTotalsAction());
 };
 
 export const addFlexibleSpendingEntryAction = (name) => (dispatch) => {
   dispatch(addFlexibleSpendingEntry(name));
-  dispatch(calculateTotals());
+  dispatch(calculateTotalsAction());
 };
 
 export const addSavingsEntryAction = (name) => (dispatch) => {
   dispatch(addSavingsEntry(name));
-  dispatch(calculateTotals());
+  dispatch(calculateTotalsAction());
 };
 
 export const updateFixedCostEntryAction = (name, amount) => (dispatch) => {
   dispatch(updateFixedCostEntry(name, amount));
-  dispatch(calculateTotals());
+  dispatch(calculateTotalsAction());
 };
 
 export const updateFlexibleSpendingEntryAction =
   (name, amount) => (dispatch) => {
     dispatch(updateFlexibleSpendingEntry(name, amount));
-    dispatch(calculateTotals());
+    dispatch(calculateTotalsAction());
   };
 
 export const updateSavingsEntryAction = (name, amount) => (dispatch) => {
   dispatch(updateSavingsEntry(name, amount));
-  dispatch(calculateTotals());
+  dispatch(calculateTotalsAction());
 };
 
 export const deleteFixedCostEntryAction = (name) => (dispatch) => {
   dispatch(deleteFixedCostEntry(name));
-  dispatch(calculateTotals());
+  dispatch(calculateTotalsAction());
 };
 
 export const deleteFlexibleSpendingEntryAction = (name) => (dispatch) => {
   dispatch(deleteFlexibleSpendingEntry(name));
-  dispatch(calculateTotals());
+  dispatch(calculateTotalsAction());
 };
 
 export const deleteSavingsEntryAction = (name) => (dispatch) => {
   dispatch(deleteSavingsEntry(name));
-  dispatch(calculateTotals());
+  dispatch(calculateTotalsAction());
 };

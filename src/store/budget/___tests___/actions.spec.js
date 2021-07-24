@@ -3,6 +3,7 @@ import {
   addFixedCostEntryAction,
   addFlexibleSpendingEntryAction,
   addSavingsEntryAction,
+  calculateTotalsAction,
   deleteFixedCostEntryAction,
   deleteFlexibleSpendingEntryAction,
   deleteSavingsEntryAction,
@@ -35,10 +36,29 @@ describe('budget actions', () => {
     store.clearActions();
   });
 
+  it('calculateTotalsAction', () => {
+    store.dispatch(calculateTotalsAction());
+
+    const result = [
+      { type: 'CALCULATE_CATEGORY_PERCENTAGES' },
+      { type: 'CALCULATE_CATEGORY_TOTALS' },
+      { type: 'CALCULATE_TOTAL_PERCENTAGE' },
+      { type: 'CALCULATE_REMAINING_AMOUNT' },
+    ];
+
+    expect(result).toEqual(store.getActions());
+  });
+
   it('setTotalBudgetAction', () => {
     store.dispatch(setTotalBudgetAction(1000));
 
-    const result = [{ type: 'SET_TOTAL_BUDGET', payload: { total: 1000 } }];
+    const result = [
+      { type: 'SET_TOTAL_BUDGET', payload: { total: 1000 } },
+      { type: 'CALCULATE_CATEGORY_PERCENTAGES' },
+      { type: 'CALCULATE_CATEGORY_TOTALS' },
+      { type: 'CALCULATE_TOTAL_PERCENTAGE' },
+      { type: 'CALCULATE_REMAINING_AMOUNT' },
+    ];
 
     expect(result).toEqual(store.getActions());
   });
