@@ -1,7 +1,7 @@
 import {
   budgetSelector,
   fixedCostsPercentageSelector,
-  fixedCostsSelector,
+  fixedCostsEntriesSelector,
   fixedCostsTotalSelector,
   flexibleSpendingPercentageSelector,
   flexibleSpendingSelector,
@@ -12,6 +12,7 @@ import {
   savingsTotalSelector,
   totalBudgetSelector,
   totalPercentageSelector,
+  fixedCostsEntriesAsObjectSelector,
 } from '../selectors';
 
 describe('budget selectors', () => {
@@ -64,8 +65,14 @@ describe('budget selectors', () => {
     expect(fixedCostsPercentageSelector(state)).toEqual(0);
   });
 
-  it('fixedCostsSelector', () => {
-    expect(fixedCostsSelector(state)).toEqual([{ name: 'rent', amount: 800 }]);
+  it('fixedCostsEntriesSelector', () => {
+    expect(fixedCostsEntriesSelector(state)).toEqual([
+      { name: 'rent', amount: 800 },
+    ]);
+  });
+
+  it('fixedCostsEntriesAsObjectSelector', () => {
+    expect(fixedCostsEntriesAsObjectSelector(state)).toEqual({ rent: 800 });
   });
 
   it('fixedCostsTotalSelector', () => {
