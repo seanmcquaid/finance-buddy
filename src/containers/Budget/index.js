@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import { H1 } from '../../components';
 import FixedCosts from './FixedCosts';
 import FlexibleSpending from './FlexibleSpending';
+import Savings from './Savings';
 import TotalBudgetForm from './TotalBudgetForm';
 import TotalBudgetInfo from './TotalBudgetInfo';
 
@@ -15,6 +16,7 @@ const Budget = () => (
       <TotalBudgetForm />
       <FixedCosts />
       <FlexibleSpending />
+      <Savings />
     </Main>
   </PageContainer>
 );

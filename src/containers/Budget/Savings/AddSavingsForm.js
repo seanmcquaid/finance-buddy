@@ -3,49 +3,47 @@ import styled from 'styled-components';
 import { Button, TextInput } from '../../../components';
 import * as Yup from 'yup';
 import { useDispatch } from 'react-redux';
-import { addFlexibleSpendingEntryAction } from '../../../store/budget/actions';
+import { addSavingsEntryAction } from '../../../store/budget/actions';
 import { atLeastOneCharacter } from '../../../utils/formValidationUtils';
 
 const validationSchema = Yup.object().shape({
-  flexibleSpendingName: Yup.string().test(
+  savingsName: Yup.string().test(
     'At least one character',
     'This field needs a name that is greater than one character',
     atLeastOneCharacter,
   ),
 });
 
-const AddFlexibleSpendingForm = () => {
+const AddSavingsForm = () => {
   const dispatch = useDispatch();
   const { handleSubmit, handleChange, values, errors, setFieldValue } =
     useFormik({
       initialValues: {
-        flexibleSpendingName: '',
+        savingsName: '',
       },
       validationSchema,
       onSubmit: (values) => {
-        dispatch(addFlexibleSpendingEntryAction(values.flexibleSpendingName));
-        setFieldValue('flexibleSpendingName', ' ');
+        dispatch(addSavingsEntryAction(values.savingsName));
+        setFieldValue('savingsName', ' ');
       },
     });
 
   return (
     <Form onSubmit={handleSubmit}>
-      {errors.flexibleSpendingName && (
-        <FlexibleSpendingInfoErrorMessage>
-          {errors.flexibleSpendingName}
-        </FlexibleSpendingInfoErrorMessage>
+      {errors.savingsName && (
+        <SavingsInfoErrorMessage>{errors.savingsName}</SavingsInfoErrorMessage>
       )}
       <TextInput
         onChange={handleChange}
-        name="flexibleSpendingName"
-        label="Flexible Spending Name"
+        name="savingsName"
+        label="Savings Name"
         type="text"
-        value={values.flexibleSpendingName}
+        value={values.savingsName}
       />
       <Button
         type="submit"
-        label="Add Flexible Spending Entry"
-        disabled={!!errors.flexibleSpendingName}
+        label="Add Savings Entry"
+        disabled={!!errors.savingsName}
       />
     </Form>
   );
@@ -53,6 +51,6 @@ const AddFlexibleSpendingForm = () => {
 
 const Form = styled.form``;
 
-const FlexibleSpendingInfoErrorMessage = styled.span``;
+const SavingsInfoErrorMessage = styled.span``;
 
-export default AddFlexibleSpendingForm;
+export default AddSavingsForm;

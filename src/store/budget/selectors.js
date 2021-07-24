@@ -60,6 +60,11 @@ export const savingsSelector = createSelector(budgetSelector, (budget) =>
   })),
 );
 
+export const savingsAsObjectSelector = createSelector(
+  budgetSelector,
+  (budget) => budget.savings,
+);
+
 export const savingsTotalSelector = createSelector(
   budgetSelector,
   (budget) => budget.savingsTotal,
