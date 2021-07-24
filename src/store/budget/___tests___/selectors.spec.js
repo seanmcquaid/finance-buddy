@@ -4,15 +4,17 @@ import {
   fixedCostsEntriesSelector,
   fixedCostsTotalSelector,
   flexibleSpendingPercentageSelector,
-  flexibleSpendingSelector,
+  flexibleSpendingEntriesSelector,
   flexibleSpendingTotalSelector,
   remainingAmountSelector,
   savingsPercentageSelector,
-  savingsSelector,
+  savingsEntriesSelector,
   savingsTotalSelector,
   totalBudgetSelector,
   totalPercentageSelector,
   fixedCostsEntriesAsObjectSelector,
+  flexibleSpendingEntriesAsObjectSelector,
+  savingsEntriesAsObjectSelector,
 } from '../selectors';
 
 describe('budget selectors', () => {
@@ -83,10 +85,16 @@ describe('budget selectors', () => {
     expect(flexibleSpendingPercentageSelector(state)).toEqual(0);
   });
 
-  it('flexibleSpendingSelector', () => {
-    expect(flexibleSpendingSelector(state)).toEqual([
+  it('flexibleSpendingEntriesSelector', () => {
+    expect(flexibleSpendingEntriesSelector(state)).toEqual([
       { name: 'cards', amount: 200 },
     ]);
+  });
+
+  it('flexibleSpendingEntriesAsObjectSelector', () => {
+    expect(flexibleSpendingEntriesAsObjectSelector(state)).toEqual({
+      cards: 200,
+    });
   });
 
   it('flexibleSpendingTotalSelector', () => {
@@ -97,8 +105,14 @@ describe('budget selectors', () => {
     expect(savingsPercentageSelector(state)).toEqual(0);
   });
 
-  it('savingsSelector', () => {
-    expect(savingsSelector(state)).toEqual([{ name: 'chase', amount: 2000 }]);
+  it('savingsEntriesSelector', () => {
+    expect(savingsEntriesSelector(state)).toEqual([
+      { name: 'chase', amount: 2000 },
+    ]);
+  });
+
+  it('savingsEntriesAsObjectSelector', () => {
+    expect(savingsEntriesAsObjectSelector(state)).toEqual({ chase: 2000 });
   });
 
   it('savingsTotalSelector', () => {
