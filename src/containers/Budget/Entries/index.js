@@ -1,20 +1,18 @@
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
-import {
-  flexibleSpendingEntriesAsObjectSelector,
-  flexibleSpendingEntriesSelector,
-} from '../../../store/budget/selectors';
-import {
-  deleteFlexibleSpendingEntryAction,
-  updateFlexibleSpendingEntryAction,
-} from '../../../store/budget/actions';
 import { Button, TextInput } from '../../../components';
 import { useState } from 'react';
 import { digitsOnly } from '../../../utils/formValidationUtils';
+import propTypes from 'prop-types';
 
-const FlexibleSpendingEntries = () => {
-  const entriesList = useSelector(flexibleSpendingEntriesSelector);
-  const entriesObject = useSelector(flexibleSpendingEntriesAsObjectSelector);
+const Entries = ({
+  entriesSelector,
+  entriesAsObjectSelector,
+  updateEntryAction,
+  deleteEntryAction,
+}) => {
+  const entriesList = useSelector(entriesSelector);
+  const entriesObject = useSelector(entriesAsObjectSelector);
   const dispatch = useDispatch();
   const [state, setState] = useState(entriesObject);
   const [errorMessage, setErrorMessage] = useState('');
@@ -27,7 +25,7 @@ const FlexibleSpendingEntries = () => {
       }));
       setErrorMessage('');
       dispatch(
-        updateFlexibleSpendingEntryAction(
+        updateEntryAction(
           event.target.name,
           Number.parseInt(event.target.value),
         ),
@@ -38,11 +36,11 @@ const FlexibleSpendingEntries = () => {
   };
 
   const deleteButtonOnClick = (name) => {
-    dispatch(deleteFlexibleSpendingEntryAction(name));
+    dispatch(deleteEntryAction(name));
   };
 
   return (
-    <FlexibleSpendingEntriesContainer>
+    <EntriesContainer>
       <AmountErrorMessage>{errorMessage}</AmountErrorMessage>
       {entriesList.map(({ name }, i) => (
         <Entry key={i}>
@@ -61,11 +59,11 @@ const FlexibleSpendingEntries = () => {
           />
         </Entry>
       ))}
-    </FlexibleSpendingEntriesContainer>
+    </EntriesContainer>
   );
 };
 
-const FlexibleSpendingEntriesContainer = styled.ul``;
+const EntriesContainer = styled.ul``;
 
 const Entry = styled.li``;
 
@@ -73,4 +71,11 @@ const EntryName = styled.span``;
 
 const AmountErrorMessage = styled.span``;
 
-export default FlexibleSpendingEntries;
+Entries.propTypes = {
+  entriesSelector: propTypes.func.isRequired,
+  entriesAsObjectSelector: propTypes.func.isRequired,
+  updateEntryAction: propTypes.func.isRequired,
+  deleteEntryAction: propTypes.func.isRequired,
+};
+
+export default Entries;

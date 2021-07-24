@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import {
-  savingsAsEntriesObjectSelector,
+  savingsEntriesAsObjectSelector,
   savingsEntriesSelector,
 } from '../../../store/budget/selectors';
 import {
@@ -14,7 +14,7 @@ import { digitsOnly } from '../../../utils/formValidationUtils';
 
 const SavingsEntries = () => {
   const entriesList = useSelector(savingsEntriesSelector);
-  const entriesObject = useSelector(savingsAsEntriesObjectSelector);
+  const entriesObject = useSelector(savingsEntriesAsObjectSelector);
   const dispatch = useDispatch();
   const [state, setState] = useState(entriesObject);
   const [errorMessage, setErrorMessage] = useState('');
