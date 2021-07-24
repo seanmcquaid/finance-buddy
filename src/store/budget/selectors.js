@@ -38,6 +38,11 @@ export const flexibleSpendingSelector = createSelector(
     })),
 );
 
+export const flexibleSpendingAsObjectSelector = createSelector(
+  budgetSelector,
+  (budget) => budget.flexibleSpending,
+);
+
 export const flexibleSpendingTotalSelector = createSelector(
   budgetSelector,
   (budget) => budget.flexibleSpendingTotal,
