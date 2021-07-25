@@ -42,28 +42,32 @@ const Entries = ({
   return (
     <EntriesContainer>
       <AmountErrorMessage>{errorMessage}</AmountErrorMessage>
-      {entriesList.map(({ name }, i) => (
-        <Entry key={i}>
-          <EntryName>{name}</EntryName>
-          <TextInput
-            label="Amount"
-            name={name}
-            value={state[name]}
-            type="text"
-            onChange={onChange}
-          />
-          <Button
-            onClick={() => deleteButtonOnClick(name)}
-            label="Delete"
-            type="button"
-          />
-        </Entry>
-      ))}
+      <EntriesList>
+        {entriesList.map(({ name }, i) => (
+          <Entry key={i}>
+            <EntryName>{name}</EntryName>
+            <TextInput
+              label="Amount"
+              name={name}
+              value={state[name]}
+              type="text"
+              onChange={onChange}
+            />
+            <Button
+              onClick={() => deleteButtonOnClick(name)}
+              label="Delete"
+              type="button"
+            />
+          </Entry>
+        ))}
+      </EntriesList>
     </EntriesContainer>
   );
 };
 
-const EntriesContainer = styled.ul``;
+const EntriesContainer = styled.div``;
+
+const EntriesList = styled.ul``;
 
 const Entry = styled.li``;
 
