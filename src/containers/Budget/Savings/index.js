@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import AddSavingsForm from './AddSavingsForm';
-import Entries from './Entries';
-import Totals from './Totals';
+import Entries from '../Entries';
+import Totals from '../Totals';
 import {
   savingsEntriesAsObjectSelector,
   savingsEntriesSelector,

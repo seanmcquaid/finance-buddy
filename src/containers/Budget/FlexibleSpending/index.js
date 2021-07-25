@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import AddFlexibleSpendingForm from './AddFlexibleSpendingForm';
-import Entries from './Entries';
-import Totals from './Totals';
+import Entries from '../Entries';
+import Totals from '../Totals';
 import {
   flexibleSpendingEntriesAsObjectSelector,
   flexibleSpendingEntriesSelector,
