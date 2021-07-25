@@ -14,15 +14,10 @@ const Entries = ({
   const entriesList = useSelector(entriesSelector);
   const entriesObject = useSelector(entriesAsObjectSelector);
   const dispatch = useDispatch();
-  const [state, setState] = useState(entriesObject);
   const [errorMessage, setErrorMessage] = useState('');
 
   const onChange = (event) => {
     if (digitsOnly(event.target.value)) {
-      setState((prevState) => ({
-        ...prevState,
-        [event.target.name]: Number.parseInt(event.target.value),
-      }));
       setErrorMessage('');
       dispatch(
         updateEntryAction(
@@ -45,11 +40,12 @@ const Entries = ({
       <EntriesList>
         {entriesList.map(({ name }, i) => (
           <Entry key={i}>
+            {console.log(entriesObject)}
             <EntryName>{name}</EntryName>
             <TextInput
               label="Amount"
               name={name}
-              value={state[name]}
+              value={entriesObject[name]}
               type="text"
               onChange={onChange}
             />

@@ -20,7 +20,7 @@ const StyledTextInput = styled.input``;
 
 TextInput.propTypes = {
   onChange: propTypes.func.isRequired,
-  value: propTypes.string.isRequired,
+  value: propTypes.oneOfType([propTypes.string, propTypes.number]),
   name: propTypes.string.isRequired,
   label: propTypes.string.isRequired,
   type: propTypes.string.isRequired,
