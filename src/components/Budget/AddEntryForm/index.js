@@ -1,38 +1,38 @@
 import { useFormik } from 'formik';
 import styled from 'styled-components';
-import { Button, TextInput } from '../../../components';
+import { Button, TextInput } from '../..';
 import { useDispatch } from 'react-redux';
 import { addEntryValidationSchema } from '../../../utils/formValidationUtils';
 import propTypes from 'prop-types';
 
-const AddEntryForm = ({ key, labelName, addEntryAction }) => {
+const AddEntryForm = ({ keyName, labelName, addEntryAction }) => {
   const dispatch = useDispatch();
   const { handleSubmit, handleChange, values, errors, setFieldValue } =
     useFormik({
       initialValues: {
-        [key]: '',
+        [keyName]: '',
       },
-      validationSchema: addEntryValidationSchema(key),
+      validationSchema: addEntryValidationSchema(keyName),
       onSubmit: (values) => {
-        dispatch(addEntryAction(values[key]));
-        setFieldValue(key, ' ');
+        dispatch(addEntryAction(values[keyName]));
+        setFieldValue(keyName, ' ');
       },
     });
 
   return (
     <Form onSubmit={handleSubmit}>
-      {errors[key] && <ErrorMessage>{errors[key]}</ErrorMessage>}
+      {errors[keyName] && <ErrorMessage>{errors[keyName]}</ErrorMessage>}
       <TextInput
         onChange={handleChange}
-        name={key}
+        name={keyName}
         label={`${labelName} Name`}
         type="text"
-        value={values[key]}
+        value={values[keyName]}
       />
       <Button
         type="submit"
         label={`Add ${labelName} Entry`}
-        disabled={!!errors[key]}
+        disabled={!!errors[keyName]}
       />
     </Form>
   );
@@ -43,7 +43,7 @@ const Form = styled.form``;
 const ErrorMessage = styled.span``;
 
 AddEntryForm.propTypes = {
-  key: propTypes.string.isRequired,
+  keyName: propTypes.string.isRequired,
   labelName: propTypes.string.isRequired,
   addEntryAction: propTypes.func.isRequired,
 };

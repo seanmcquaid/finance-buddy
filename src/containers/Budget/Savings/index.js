@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import AddSavingsForm from './AddSavingsForm';
 import Entries from '../Entries';
 import Totals from '../Totals';
 import {
@@ -9,9 +8,11 @@ import {
   savingsTotalSelector,
 } from '../../../store/budget/selectors';
 import {
+  addSavingsEntryAction,
   deleteSavingsEntryAction,
   updateSavingsEntryAction,
 } from '../../../store/budget/actions';
+import AddEntryForm from '../../../components/Budget/AddEntryForm';
 
 const Savings = () => (
   <SavingsContainer>
@@ -25,7 +26,11 @@ const Savings = () => (
       updateEntryAction={updateSavingsEntryAction}
       deleteEntryAction={deleteSavingsEntryAction}
     />
-    <AddSavingsForm />
+    <AddEntryForm
+      keyName="savingsName"
+      labelName="Savings"
+      addEntryAction={addSavingsEntryAction}
+    />
   </SavingsContainer>
 );
 

@@ -1,6 +1,5 @@
 import styled from 'styled-components';
-import AddFixedCostForm from './AddFixedCostForm';
-import Totals from '../Totals';
+import Totals from '../../../components/Budget/Totals';
 import Entries from '../Entries';
 import {
   fixedCostsPercentageSelector,
@@ -9,9 +8,11 @@ import {
   fixedCostsEntriesSelector,
 } from '../../../store/budget/selectors';
 import {
+  addFixedCostEntryAction,
   deleteFixedCostEntryAction,
   updateFixedCostEntryAction,
 } from '../../../store/budget/actions';
+import AddEntryForm from '../../../components/Budget/AddEntryForm';
 
 const FixedCosts = () => (
   <FixedCostsContainer>
@@ -25,7 +26,11 @@ const FixedCosts = () => (
       updateEntryAction={updateFixedCostEntryAction}
       deleteEntryAction={deleteFixedCostEntryAction}
     />
-    <AddFixedCostForm />
+    <AddEntryForm
+      keyName="fixedCostName"
+      labelName="Fixed Cost"
+      addEntryAction={addFixedCostEntryAction}
+    />
   </FixedCostsContainer>
 );
 

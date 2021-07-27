@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import AddFlexibleSpendingForm from './AddFlexibleSpendingForm';
 import Entries from '../Entries';
 import Totals from '../Totals';
 import {
@@ -9,9 +8,11 @@ import {
   flexibleSpendingTotalSelector,
 } from '../../../store/budget/selectors';
 import {
+  addFlexibleSpendingEntryAction,
   deleteFlexibleSpendingEntryAction,
   updateFlexibleSpendingEntryAction,
 } from '../../../store/budget/actions';
+import AddEntryForm from '../../../components/Budget/AddEntryForm';
 
 const FlexibleSpending = () => (
   <FlexibleSpendingContainer>
@@ -25,7 +26,11 @@ const FlexibleSpending = () => (
       updateEntryAction={updateFlexibleSpendingEntryAction}
       deleteEntryAction={deleteFlexibleSpendingEntryAction}
     />
-    <AddFlexibleSpendingForm />
+    <AddEntryForm
+      keyName="flexibleSpendingName"
+      labelName="Flexible Spending"
+      addEntryAction={addFlexibleSpendingEntryAction}
+    />
   </FlexibleSpendingContainer>
 );
 
