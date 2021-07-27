@@ -1,18 +1,9 @@
 import { useFormik } from 'formik';
 import styled from 'styled-components';
 import { Button, TextInput } from '../../../components';
-import * as Yup from 'yup';
 import { useDispatch } from 'react-redux';
 import { addSavingsEntryAction } from '../../../store/budget/actions';
-import { atLeastOneCharacter } from '../../../utils/formValidationUtils';
-
-const validationSchema = Yup.object().shape({
-  savingsName: Yup.string().test(
-    'At least one character',
-    'This field needs a name that is greater than one character',
-    atLeastOneCharacter,
-  ),
-});
+import { addEntryValidationSchema } from '../../../utils/formValidationUtils';
 
 const AddSavingsForm = () => {
   const dispatch = useDispatch();
@@ -21,7 +12,7 @@ const AddSavingsForm = () => {
       initialValues: {
         savingsName: '',
       },
-      validationSchema,
+      validationSchema: addEntryValidationSchema('savingsName'),
       onSubmit: (values) => {
         dispatch(addSavingsEntryAction(values.savingsName));
         setFieldValue('savingsName', ' ');

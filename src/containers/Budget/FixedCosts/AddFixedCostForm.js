@@ -1,18 +1,9 @@
 import { useFormik } from 'formik';
 import styled from 'styled-components';
 import { Button, TextInput } from '../../../components';
-import * as Yup from 'yup';
 import { useDispatch } from 'react-redux';
 import { addFixedCostEntryAction } from '../../../store/budget/actions';
-import { atLeastOneCharacter } from '../../../utils/formValidationUtils';
-
-const validationSchema = Yup.object().shape({
-  fixedCostName: Yup.string().test(
-    'At least one character',
-    'This field needs a name that is greater than one character',
-    atLeastOneCharacter,
-  ),
-});
+import { addEntryValidationSchema } from '../../../utils/formValidationUtils';
 
 const AddFixedCostForm = () => {
   const dispatch = useDispatch();
@@ -21,7 +12,7 @@ const AddFixedCostForm = () => {
       initialValues: {
         fixedCostName: '',
       },
-      validationSchema,
+      validationSchema: addEntryValidationSchema('fixedCostName'),
       onSubmit: (values) => {
         dispatch(addFixedCostEntryAction(values.fixedCostName));
         setFieldValue('fixedCostName', ' ');

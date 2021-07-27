@@ -1,18 +1,9 @@
 import { useFormik } from 'formik';
 import styled from 'styled-components';
 import { Button, TextInput } from '../../../components';
-import * as Yup from 'yup';
 import { useDispatch } from 'react-redux';
 import { addFlexibleSpendingEntryAction } from '../../../store/budget/actions';
-import { atLeastOneCharacter } from '../../../utils/formValidationUtils';
-
-const validationSchema = Yup.object().shape({
-  flexibleSpendingName: Yup.string().test(
-    'At least one character',
-    'This field needs a name that is greater than one character',
-    atLeastOneCharacter,
-  ),
-});
+import { addEntryValidationSchema } from '../../../utils/formValidationUtils';
 
 const AddFlexibleSpendingForm = () => {
   const dispatch = useDispatch();
@@ -21,7 +12,7 @@ const AddFlexibleSpendingForm = () => {
       initialValues: {
         flexibleSpendingName: '',
       },
-      validationSchema,
+      validationSchema: addEntryValidationSchema('flexibleSpendingName'),
       onSubmit: (values) => {
         dispatch(addFlexibleSpendingEntryAction(values.flexibleSpendingName));
         setFieldValue('flexibleSpendingName', ' ');
