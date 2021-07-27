@@ -5,8 +5,7 @@ import budgetReducer from './budget/reducer';
 import mortgageReducer from './mortgage/reducer';
 import retirementReducer from './retirement/reducer';
 import storage from 'redux-persist/lib/storage';
-import persistReducer from 'redux-persist/es/persistReducer';
-import persistStore from 'redux-persist/es/persistStore';
+import { persistReducer, persistStore } from 'redux-persist';
 
 const rootReducer = combineReducers({
   budget: budgetReducer,
