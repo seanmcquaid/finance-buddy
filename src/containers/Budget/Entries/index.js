@@ -40,7 +40,6 @@ const Entries = ({
       <EntriesList>
         {entriesList.map(({ name }, i) => (
           <Entry key={i}>
-            {console.log(entriesObject)}
             <EntryName>{name}</EntryName>
             <TextInput
               label="Amount"
