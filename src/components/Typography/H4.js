@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 
-const H3 = styled.h3``;
+const H4 = styled.h4`
+  padding: 1rem;
+`;
 
-export default H3;
+export default H4;

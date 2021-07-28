@@ -47,7 +47,7 @@ const CategoriesContainer = styled.div`
   align-items: center;
   justify-content: center;
   flex-direction: row;
-  @media only screen and (max-width: 650px) {
+  @media only screen and (max-width: 800px) {
     flex-direction: column;
   }
 `;

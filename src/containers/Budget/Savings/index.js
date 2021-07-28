@@ -22,20 +22,26 @@ const Savings = () => (
       totalSelector={savingsTotalSelector}
       percentageSelector={savingsPercentageSelector}
     />
+    <AddEntryForm
+      keyName="savingsName"
+      labelName="Savings"
+      addEntryAction={addSavingsEntryAction}
+    />
     <Entries
       entriesSelector={savingsEntriesSelector}
       entriesAsObjectSelector={savingsEntriesAsObjectSelector}
       updateEntryAction={updateSavingsEntryAction}
       deleteEntryAction={deleteSavingsEntryAction}
     />
-    <AddEntryForm
-      keyName="savingsName"
-      labelName="Savings"
-      addEntryAction={addSavingsEntryAction}
-    />
   </SavingsContainer>
 );
 
-const SavingsContainer = styled.div``;
+const SavingsContainer = styled.div`
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+`;
 
 export default Savings;

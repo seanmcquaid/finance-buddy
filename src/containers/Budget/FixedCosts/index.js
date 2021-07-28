@@ -22,20 +22,26 @@ const FixedCosts = () => (
       totalSelector={fixedCostsTotalSelector}
       percentageSelector={fixedCostsPercentageSelector}
     />
+    <AddEntryForm
+      keyName="fixedCostName"
+      labelName="Fixed Cost"
+      addEntryAction={addFixedCostEntryAction}
+    />
     <Entries
       entriesSelector={fixedCostsEntriesSelector}
       entriesAsObjectSelector={fixedCostsEntriesAsObjectSelector}
       updateEntryAction={updateFixedCostEntryAction}
       deleteEntryAction={deleteFixedCostEntryAction}
     />
-    <AddEntryForm
-      keyName="fixedCostName"
-      labelName="Fixed Cost"
-      addEntryAction={addFixedCostEntryAction}
-    />
   </FixedCostsContainer>
 );
 
-const FixedCostsContainer = styled.div``;
+const FixedCostsContainer = styled.div`
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+`;
 
 export default FixedCosts;

@@ -22,20 +22,26 @@ const FlexibleSpending = () => (
       totalSelector={flexibleSpendingTotalSelector}
       percentageSelector={flexibleSpendingPercentageSelector}
     />
+    <AddEntryForm
+      keyName="flexibleSpendingName"
+      labelName="Flexible Spending"
+      addEntryAction={addFlexibleSpendingEntryAction}
+    />
     <Entries
       entriesSelector={flexibleSpendingEntriesSelector}
       entriesAsObjectSelector={flexibleSpendingEntriesAsObjectSelector}
       updateEntryAction={updateFlexibleSpendingEntryAction}
       deleteEntryAction={deleteFlexibleSpendingEntryAction}
     />
-    <AddEntryForm
-      keyName="flexibleSpendingName"
-      labelName="Flexible Spending"
-      addEntryAction={addFlexibleSpendingEntryAction}
-    />
   </FlexibleSpendingContainer>
 );
 
-const FlexibleSpendingContainer = styled.div``;
+const FlexibleSpendingContainer = styled.div`
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+`;
 
 export default FlexibleSpending;
