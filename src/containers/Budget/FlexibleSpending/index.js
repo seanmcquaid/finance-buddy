@@ -13,9 +13,11 @@ import {
   deleteFlexibleSpendingEntryAction,
   updateFlexibleSpendingEntryAction,
 } from '../../../store/budget/actions';
+import { H4 } from '../../../components';
 
 const FlexibleSpending = () => (
   <FlexibleSpendingContainer>
+    <H4>Flexible Spending</H4>
     <Totals
       totalSelector={flexibleSpendingTotalSelector}
       percentageSelector={flexibleSpendingPercentageSelector}

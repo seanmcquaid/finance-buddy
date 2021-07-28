@@ -13,9 +13,11 @@ import {
   deleteSavingsEntryAction,
   updateSavingsEntryAction,
 } from '../../../store/budget/actions';
+import { H4 } from '../../../components';
 
 const Savings = () => (
   <SavingsContainer>
+    <H4>Savings</H4>
     <Totals
       totalSelector={savingsTotalSelector}
       percentageSelector={savingsPercentageSelector}

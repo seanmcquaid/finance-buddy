@@ -13,9 +13,11 @@ import {
   deleteFixedCostEntryAction,
   updateFixedCostEntryAction,
 } from '../../../store/budget/actions';
+import { H4 } from '../../../components';
 
 const FixedCosts = () => (
   <FixedCostsContainer>
+    <H4>Fixed Costs</H4>
     <Totals
       totalSelector={fixedCostsTotalSelector}
       percentageSelector={fixedCostsPercentageSelector}
