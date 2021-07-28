@@ -1,6 +1,7 @@
 import styled from 'styled-components';
-import Entries from '../Entries';
-import Totals from '../Totals';
+import Totals from '../../../components/Budget/Totals';
+import Entries from '../../../components/Budget/Entries';
+import AddEntryForm from '../../../components/Budget/AddEntryForm';
 import {
   savingsEntriesAsObjectSelector,
   savingsEntriesSelector,
@@ -12,7 +13,6 @@ import {
   deleteSavingsEntryAction,
   updateSavingsEntryAction,
 } from '../../../store/budget/actions';
-import AddEntryForm from '../../../components/Budget/AddEntryForm';
 
 const Savings = () => (
   <SavingsContainer>
