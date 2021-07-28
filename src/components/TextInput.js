@@ -14,7 +14,13 @@ const TextInput = ({ onChange, value, name, label, type }) => (
   </Label>
 );
 
-const Label = styled.label``;
+const Label = styled.label`
+  display: flex;
+  align-items: left;
+  justify-content: center;
+  flex-direction: column;
+  padding: 1rem;
+`;
 
 const StyledTextInput = styled.input``;
 

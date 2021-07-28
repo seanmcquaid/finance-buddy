@@ -14,7 +14,12 @@ const Totals = ({ totalSelector, percentageSelector }) => {
   );
 };
 
-const TotalsContainer = styled.div``;
+const TotalsContainer = styled.div`
+  display: flex;
+  align-items: left;
+  justify-content: center;
+  flex-direction: column;
+`;
 
 const Total = styled.span``;
 

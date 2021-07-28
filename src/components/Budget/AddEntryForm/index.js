@@ -38,7 +38,12 @@ const AddEntryForm = ({ keyName, labelName, addEntryAction }) => {
   );
 };
 
-const Form = styled.form``;
+const Form = styled.form`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+`;
 
 const ErrorMessage = styled.span``;
 
