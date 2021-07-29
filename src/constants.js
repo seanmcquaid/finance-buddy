@@ -2,8 +2,8 @@ const constants = {
   backgroundColor: '',
   foregroundColor: '',
   textColor: '',
-  headerFont: '',
-  paragraphFont: '',
+  headerFont: "'Nunito', sans-serif",
+  paragraphFont: "'Nunito', sans-serif",
 };
 
 export default constants;
