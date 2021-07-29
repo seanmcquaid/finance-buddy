@@ -49,7 +49,12 @@ const TotalBudgetForm = () => {
   );
 };
 
-const Form = styled.form``;
+const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+`;
 
 const TotalBudgetErrorMessage = styled.span``;
 
