@@ -44,7 +44,7 @@ const Main = styled.main`
 
 const CategoriesContainer = styled.div`
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
   flex-direction: row;
   @media only screen and (max-width: 800px) {
