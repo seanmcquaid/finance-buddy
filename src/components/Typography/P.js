@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import constants from '../../constants';
 
 const P = styled.p`
-  padding: 1rem;
+  padding: 0.5rem;
   font-family: ${constants.paragraphFont};
 `;
 

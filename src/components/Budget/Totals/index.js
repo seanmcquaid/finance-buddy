@@ -1,6 +1,7 @@
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import propTypes from 'prop-types';
+import P from '../../Typography/P';
 
 const Totals = ({ totalSelector, percentageSelector }) => {
   const total = useSelector(totalSelector);
@@ -8,8 +9,8 @@ const Totals = ({ totalSelector, percentageSelector }) => {
 
   return (
     <TotalsContainer>
-      <Total> Total : {total}</Total>
-      <Percentage>Total Percentage : {percentage}</Percentage>
+      <P> Total : {total}</P>
+      <P>Total Percentage : {percentage}</P>
     </TotalsContainer>
   );
 };
@@ -20,10 +21,6 @@ const TotalsContainer = styled.div`
   justify-content: center;
   flex-direction: column;
 `;
-
-const Total = styled.span``;
-
-const Percentage = styled.span``;
 
 Totals.propTypes = {
   totalSelector: propTypes.func.isRequired,

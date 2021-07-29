@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import propTypes from 'prop-types';
+import constants from '../constants';
 
 const TextInput = ({ onChange, value, name, label, type }) => (
   <Label htmlFor={name}>
@@ -20,9 +21,16 @@ const Label = styled.label`
   justify-content: center;
   flex-direction: column;
   padding: 1rem;
+  font-family: ${constants.paragraphFont};
 `;
 
-const StyledTextInput = styled.input``;
+const StyledTextInput = styled.input`
+  font-family: ${constants.paragraphFont};
+  padding: 0.5rem;
+  outline: none;
+  border: 2px solid black;
+  border-radius: 16px;
+`;
 
 TextInput.propTypes = {
   onChange: propTypes.func.isRequired,
