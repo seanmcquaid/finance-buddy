@@ -11,6 +11,12 @@ const GlobalStyle = createGlobalStyle`
       margin: 0;
       padding: 0;
     }
+  body, html {
+    height: 100%;
+  }
+  #root {
+    min-height: calc(100vh - 70px);
+  }
 `;
 
 if (process.env.NODE_ENV !== 'production') {
