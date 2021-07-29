@@ -4,13 +4,15 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { createGlobalStyle } from 'styled-components';
 import axe from '@axe-core/react';
+import constants from './constants';
 
 const GlobalStyle = createGlobalStyle`
   * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: ${constants.paragraphFont};
+  }
   body, html {
     height: 100%;
   }

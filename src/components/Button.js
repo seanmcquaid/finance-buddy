@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import propTypes from 'prop-types';
+import constants from '../constants';
 
 const Button = ({ onClick, label, type, disabled }) => (
   <StyledButton
@@ -11,7 +12,13 @@ const Button = ({ onClick, label, type, disabled }) => (
   </StyledButton>
 );
 
-const StyledButton = styled.button``;
+const StyledButton = styled.button`
+  padding: 1rem;
+  font-family: ${constants.paragraphFont};
+  border: 2px solid black;
+  border-radius: 8px;
+  outline: none;
+`;
 
 Button.propTypes = {
   onClick: propTypes.func,
