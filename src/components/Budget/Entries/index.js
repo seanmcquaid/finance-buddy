@@ -60,11 +60,22 @@ const Entries = ({
   );
 };
 
-const EntriesContainer = styled.div``;
+const EntriesContainer = styled.div`
+  padding: 1rem;
+  width: 100%;
+  max-width: 20rem;
+`;
 
-const EntriesList = styled.ul``;
+const EntriesList = styled.ul`
+  list-style: none;
+`;
 
-const Entry = styled.li``;
+const Entry = styled.li`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.5rem;
+`;
 
 const EntryName = styled.span``;
 
