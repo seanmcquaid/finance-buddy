@@ -1,12 +1,15 @@
 const constants = {
-  backgroundColor: '#A4B0F5',
-  foregroundColor: '#4464AD',
-  textColorForBackground: 'black',
-  textColorForForeground: 'white',
+  teal: '#508991',
+  darkBlue: '#172A3A',
+  warmBlack: '#004346',
+  skyBlue: '#74B3CE',
+  green: '#09BC8A',
+  white: 'white',
+  black: 'black',
   headerFont: "'Nunito', sans-serif",
   paragraphFont: "'Nunito', sans-serif",
 };
 
 export default constants;
 
-// consider 466995 as a color choice as well for foreground
+// https://coolors.co/74b3ce-508991-172a3a-004346-09bc8a - palette

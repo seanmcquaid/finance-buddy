@@ -15,6 +15,8 @@ const GlobalStyle = createGlobalStyle`
   }
   body, html {
     height: 100%;
+    background-color: ${constants.warmBlack};
+    color: ${constants.white};
   }
   #root {
     min-height: calc(100vh - 70px);
