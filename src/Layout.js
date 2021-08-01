@@ -1,12 +1,13 @@
 import propTypes from 'prop-types';
 import styled from 'styled-components';
 import Navbar from './components/Navbar';
+import constants from './constants';
 
 const Layout = ({ children }) => (
   <LayoutContainer>
     <Navbar />
     <Content>{children}</Content>
-    <Footer>Footer</Footer>
+    <Footer> &copy; Musician That Codes</Footer>
   </LayoutContainer>
 );
 
@@ -19,7 +20,11 @@ const Content = styled.div`
 `;
 
 const Footer = styled.footer`
+  text-align: center;
   height: 50px;
+  width: 100%;
+  background-color: ${constants.darkBlue};
+  padding: 1rem;
 `;
 
 Layout.propTypes = {
