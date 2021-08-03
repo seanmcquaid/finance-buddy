@@ -15,3 +15,7 @@
 5. Input after-tax monthly amount saved
 6. Input employer match
 7. Calculate rough net worth
+
+To Do :
+
+1. Refactor for number inputs
