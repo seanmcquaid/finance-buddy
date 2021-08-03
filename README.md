@@ -1,16 +1,5 @@
 # Finance Buddy
 
-## Budgeting
-
-1. Based off the 50 - 30 - 20 method (Or allow user to see it dynamically change?)
-2. Input after tax income
-3. Calculate totals for each category then see how much is left over
-4. Display current percentages
-
-50 - Fixed
-30 - Variable
-20 - Savings
-
 ## Mortgage
 
 1. Input interest rate
@@ -26,7 +15,3 @@
 5. Input after-tax monthly amount saved
 6. Input employer match
 7. Calculate rough net worth
-
-## Additional Arch
-
-Formik + Yup for the inputs?
