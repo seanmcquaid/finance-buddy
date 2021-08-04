@@ -1,5 +1,7 @@
 const initialState = {
-  token: null,
+  interestRate: 0,
+  mortgageLength: 30,
+  estimatedMonthlyPayment: 0,
 };
 
 const reducer = (state = initialState, action) => {
