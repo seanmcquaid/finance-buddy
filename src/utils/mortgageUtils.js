@@ -15,7 +15,8 @@ export const calculateMonthlyPayment = (
   const principal = totalLoanAmount - downPaymentAmount;
   const months = mortgageLength * 12;
   return (
-    (principal * Math.pow(1 + interestRate, months)) /
-    (Math.pow(1 + interestRate, months) - 1)
+    principal *
+    ((interestRate * Math.pow(1 + interestRate, months)) /
+      (Math.pow(1 + interestRate, months) - 1))
   );
 };
