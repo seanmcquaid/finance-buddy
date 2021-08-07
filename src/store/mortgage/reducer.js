@@ -15,8 +15,6 @@ const initialState = {
   monthlyPayment: 0,
 };
 
-// todo - calculate monthly payment set up and selectors
-
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case SET_INTEREST_RATE:
