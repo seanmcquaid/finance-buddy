@@ -7,10 +7,10 @@
 // n = number of months required to repay the loan
 
 export const calculateMonthlyPayment = (
-  totalLoanAmount,
-  downPaymentAmount,
-  interestRate,
-  mortgageLength,
+  totalLoanAmount = 0,
+  downPaymentAmount = 0,
+  interestRate = 0,
+  mortgageLength = 0,
 ) => {
   const principal = totalLoanAmount - downPaymentAmount;
   const months = mortgageLength * 12;
