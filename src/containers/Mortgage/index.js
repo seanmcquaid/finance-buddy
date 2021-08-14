@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { H1 } from '../../components';
+import MonthlyPayment from './MonthlyPayment';
 import MortgageInfoForm from './MortgageInfoForm';
 
 const Mortgage = () => (
@@ -9,6 +10,7 @@ const Mortgage = () => (
     </Header>
     <Main>
       <MortgageInfoForm />
+      <MonthlyPayment />
     </Main>
   </PageContainer>
 );
