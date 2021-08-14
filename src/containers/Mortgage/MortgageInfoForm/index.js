@@ -13,7 +13,7 @@ import {
 
 const MortgageInfoForm = () => {
   const mortgageLength = useSelector(mortgageLengthSelector);
-  const mortgageLengthOptions = useMemo([15, 30], []);
+  const mortgageLengthOptions = useMemo(() => [15, 30], []);
   const interestRate = useSelector(interestRateSelector);
   const dispatch = useDispatch();
 

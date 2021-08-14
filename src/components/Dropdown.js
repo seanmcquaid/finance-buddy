@@ -26,11 +26,11 @@ const StyledSelect = styled.select``;
 const StyledOption = styled.option``;
 
 Dropdown.propTypes = {
-  options: propTypes.arrayOf(propTypes.string.isRequired),
+  options: propTypes.arrayOf(propTypes.any.isRequired),
   onChange: propTypes.func.isRequired,
   name: propTypes.string.isRequired,
   label: propTypes.string.isRequired,
-  value: propTypes.string.isRequired,
+  value: propTypes.any.isRequired,
 };
 
 export default Dropdown;
