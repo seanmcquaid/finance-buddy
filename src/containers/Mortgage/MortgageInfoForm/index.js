@@ -22,7 +22,7 @@ const MortgageInfoForm = () => {
   };
 
   const interestRateOnChange = (event) => {
-    dispatch(setInterestRateAction(event.target.value));
+    dispatch(setInterestRateAction(Number(event.target.value)));
   };
 
   return (
