@@ -1,11 +1,5 @@
 # Finance Buddy
 
-## Mortgage
-
-1. Input interest rate
-2. Select mortgage length - 30 vs 15
-3. Calculate rough monthly payment
-
 ## Retirement
 
 1. Input current age
