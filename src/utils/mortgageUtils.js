@@ -15,11 +15,13 @@ export const calculateMonthlyPayment = (
   const principal = totalLoanAmount - downPaymentAmount;
   const months = mortgageLength * 12;
   const monthlyInterestRate = interestRate / 100 / 12;
-  return Number(
-    (
-      principal *
-      ((monthlyInterestRate * Math.pow(1 + monthlyInterestRate, months)) /
-        (Math.pow(1 + monthlyInterestRate, months) - 1))
-    ).toFixed(2),
-  );
+  const numerator =
+    monthlyInterestRate * Math.pow(1 + monthlyInterestRate, months);
+  const denominator = Math.pow(1 + monthlyInterestRate, months) - 1;
+
+  if (denominator <= 0) {
+    return 0;
+  }
+
+  return Number((principal * (numerator / denominator)).toFixed(2));
 };
