@@ -2,6 +2,8 @@
 
 ## Retirement
 
+https://www.synchronybank.com/blog/ultimate-guide-to-retirement-calculations/ - article for potential formulas
+
 1. Input current age
 2. Input retirement age
 3. Input current total saved for retirement
