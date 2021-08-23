@@ -48,7 +48,7 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         yearsUntilRetirement: calculateYearsUntilRetirement(
-          state.amountNeededInRetirement,
+          state.additionalSavingsNeededToRetire,
           state.monthlyBudget * 12,
         ),
       };
