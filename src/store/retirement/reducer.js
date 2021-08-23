@@ -1,5 +1,8 @@
 const initialState = {
-  token: null,
+  monthlyBudget: 0,
+  currentAmountInRetirement: 0,
+  amountNeededInRetirement: 0,
+  yearsUntilRetirement: 30,
 };
 
 const reducer = (state = initialState, action) => {
