@@ -24,5 +24,5 @@ export const additionalSavingsNeededToRetireSelector = createSelector(
 
 export const yearsUntilRetirementSelector = createSelector(
   retirementSelector,
-  (retirement) => retirement.additionalSavingsNeededToRetir,
+  (retirement) => retirement.yearsUntilRetirement,
 );
