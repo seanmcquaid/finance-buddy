@@ -7,4 +7,6 @@ export const calculateAdditionalSavingsNeededToRetire = (
 ) => total - currentRetirementSavings;
 
 export const calculateYearsUntilRetirement = (total, yearlyRetirementSavings) =>
-  Math.ceil(total / yearlyRetirementSavings);
+  isNaN(total / yearlyRetirementSavings)
+    ? 0
+    : Math.ceil(total / yearlyRetirementSavings);
