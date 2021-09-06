@@ -15,10 +15,23 @@ const Retirement = () => (
   </PageContainer>
 );
 
-const PageContainer = styled.div``;
+const PageContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+`;
 
-const Header = styled.header``;
+const Header = styled.header`
+  padding: 1rem;
+`;
 
-const Main = styled.main``;
+const Main = styled.main`
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+`;
 
 export default Retirement;

@@ -11,6 +11,7 @@ const LinkButton = ({ label, to }) => (
 
 const StyledLinkButton = styled(Link)`
   padding: 1rem;
+  margin: 1rem;
   font-family: ${constants.paragraphFont};
   border: ${(props) =>
     props.secondary
@@ -22,6 +23,7 @@ const StyledLinkButton = styled(Link)`
     props.secondary ? `${constants.skyBlue}` : `${constants.green}`};
   border-radius: 16px;
   outline: none;
+  text-decoration: none;
 `;
 
 LinkButton.propTypes = {

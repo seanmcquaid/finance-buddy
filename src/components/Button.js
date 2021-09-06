@@ -15,6 +15,7 @@ const Button = ({ onClick, label, type, disabled, secondary }) => (
 
 const StyledButton = styled.button`
   padding: 1rem;
+  margin: 1rem;
   font-family: ${constants.paragraphFont};
   border: ${(props) =>
     props.secondary

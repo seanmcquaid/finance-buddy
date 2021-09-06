@@ -11,24 +11,39 @@ const Home = () => (
       <LinksContainer>
         <LinkButton label="Mortgage" to="/mortgage" />
         <LinkButton label="Retirement" to="/retirement" />
-        <LinkButton label="Budge" to="/budget" />
+        <LinkButton label="Budget" to="/budget" />
       </LinksContainer>
     </Main>
   </PageContainer>
 );
 
 const PageContainer = styled.div`
-  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 `;
 
-const Header = styled.header``;
+const Header = styled.header`
+  padding: 1rem;
+`;
 
 const Main = styled.main`
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   width: 100%;
+  height: 100%;
 `;
 
 const LinksContainer = styled.div`
   width: 100%;
+  height: 10rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 export default Home;
