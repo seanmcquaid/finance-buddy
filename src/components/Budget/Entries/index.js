@@ -1,8 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { Button, TextInput } from '../../../components';
-import { useState } from 'react';
-import { digitsOnly } from '../../../utils/formValidationUtils';
 import propTypes from 'prop-types';
 
 const Entries = ({
@@ -14,20 +12,9 @@ const Entries = ({
   const entriesList = useSelector(entriesSelector);
   const entriesObject = useSelector(entriesAsObjectSelector);
   const dispatch = useDispatch();
-  const [errorMessage, setErrorMessage] = useState('');
 
   const onChange = (event) => {
-    if (digitsOnly(event.target.value)) {
-      setErrorMessage('');
-      dispatch(
-        updateEntryAction(
-          event.target.name,
-          Number.parseInt(event.target.value),
-        ),
-      );
-    } else {
-      setErrorMessage('Please enter only numbers');
-    }
+    dispatch(updateEntryAction(event.target.name, event.target.value));
   };
 
   const deleteButtonOnClick = (name) => {
@@ -36,7 +23,6 @@ const Entries = ({
 
   return (
     <EntriesContainer>
-      <AmountErrorMessage>{errorMessage}</AmountErrorMessage>
       <EntriesList>
         {entriesList.map(({ name }, i) => (
           <Entry key={i}>
@@ -45,7 +31,7 @@ const Entries = ({
               label="Amount"
               name={name}
               value={entriesObject[name]}
-              type="text"
+              type="number"
               onChange={onChange}
             />
             <Button
@@ -78,8 +64,6 @@ const Entry = styled.li`
 `;
 
 const EntryName = styled.span``;
-
-const AmountErrorMessage = styled.span``;
 
 Entries.propTypes = {
   entriesSelector: propTypes.func.isRequired,
