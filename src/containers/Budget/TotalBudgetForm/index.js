@@ -1,49 +1,26 @@
-import { useFormik } from 'formik';
 import styled from 'styled-components';
-import { Button, TextInput } from '../../../components';
-import * as Yup from 'yup';
+import { TextInput } from '../../../components';
 import { useDispatch } from 'react-redux';
 import { setTotalBudgetAction } from '../../../store/budget/actions';
-import { digitsOnly } from '../../../utils/formValidationUtils';
-
-const validationSchema = Yup.object().shape({
-  totalBudget: Yup.string().test(
-    'Digits only',
-    'This field should have digits only',
-    digitsOnly,
-  ),
-});
+import { useSelector } from 'react-redux';
+import { totalBudgetSelector } from '../../../store/budget/selectors';
 
 const TotalBudgetForm = () => {
   const dispatch = useDispatch();
-  const { handleSubmit, handleChange, values, errors, setFieldValue } =
-    useFormik({
-      initialValues: {
-        totalBudget: '0',
-      },
-      validationSchema,
-      onSubmit: (values) => {
-        dispatch(setTotalBudgetAction(Number.parseInt(values.totalBudget)));
-        setFieldValue('totalBudget', '0');
-      },
-    });
+  const totalBudget = useSelector(totalBudgetSelector);
+
+  const onChange = (event) => {
+    dispatch(setTotalBudgetAction(Number(event.target.value)));
+  };
 
   return (
-    <Form onSubmit={handleSubmit}>
-      {errors.totalBudget && (
-        <TotalBudgetErrorMessage>{errors.totalBudget}</TotalBudgetErrorMessage>
-      )}
+    <Form>
       <TextInput
-        onChange={handleChange}
+        onChange={onChange}
         name="totalBudget"
         label="Total Budget"
-        type="text"
-        value={values.totalBudget}
-      />
-      <Button
-        type="submit"
-        label="Set Total Budget"
-        disabled={!!errors.totalBudget}
+        type="number"
+        value={totalBudget}
       />
     </Form>
   );
@@ -55,7 +32,5 @@ const Form = styled.form`
   align-items: center;
   justify-content: center;
 `;
-
-const TotalBudgetErrorMessage = styled.span``;
 
 export default TotalBudgetForm;
