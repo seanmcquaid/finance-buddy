@@ -60,7 +60,6 @@ const reducer = (state = initialState, action) => {
         calculateTotalForCategory(state.flexibleSpending),
         calculateTotalForCategory(state.savings),
       );
-      console.log(total, state);
       return {
         ...state,
         remainingAmount: calculateRemainingAmount(state.totalBudget, total),
