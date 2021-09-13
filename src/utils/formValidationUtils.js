@@ -1,7 +1,5 @@
 import * as Yup from 'yup';
 
-export const digitsOnly = (value) => /^\d+$/.test(value);
-
 export const atLeastOneCharacter = (value) => value?.length >= 1 ?? false;
 
 export const addEntryValidationSchema = (key) =>
