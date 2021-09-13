@@ -14,7 +14,7 @@ const Entries = ({
   const dispatch = useDispatch();
 
   const onChange = (event) => {
-    dispatch(updateEntryAction(event.target.name, event.target.value));
+    dispatch(updateEntryAction(event.target.name, Number(event.target.value)));
   };
 
   const deleteButtonOnClick = (name) => {
